@@ -1,17 +1,4 @@
-/**
- * Om Pranab Mohanty - Personal Academic Website
- * script.js - Main JavaScript functionality
- * 
- * Features:
- * - Fetches public GitHub repositories
- * - Smooth scroll navigation
- * - Responsive interactions
- * - Accessibility enhancements
- */
 
-// ============================================
-// CONFIGURATION
-// ============================================
 
 // GitHub API configuration
 const GITHUB_USERNAME = '04pranab';
