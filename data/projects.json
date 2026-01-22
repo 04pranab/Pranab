@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "riscv-emulator",
+    "description": "A RISC-V instruction set emulator built from scratch. Implements core RISC-V ISA with proper memory management and instruction decoding.",
+    "language": "C",
+    "url": "https://github.com/04pranab/riscv-emulator",
+    "rank": 1
+  },
+  {
+    "id": 2,
+    "name": "os-bootloader",
+    "description": "Custom OS bootloader targeting x86-64 architecture. Implements real mode to protected mode transition with GDT setup.",
+    "language": "Assembly",
+    "url": "https://github.com/04pranab/os-bootloader",
+    "rank": 2
+  },
+  {
+    "id": 3,
+    "name": "cache-simulator",
+    "description": "Multi-level cache hierarchy simulator. Analyzes cache hit/miss patterns and performance metrics for different memory access patterns.",
+    "language": "Python",
+    "url": "https://github.com/04pranab/cache-simulator",
+    "rank": 3
+  }
+]
