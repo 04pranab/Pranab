@@ -1,26 +1,26 @@
 [
   {
     "id": 1,
-    "name": "riscv-emulator",
-    "description": "A RISC-V instruction set emulator built from scratch. Implements core RISC-V ISA with proper memory management and instruction decoding.",
-    "language": "C",
-    "url": "https://github.com/04pranab/riscv-emulator",
+    "name": "os-symmetry-synchronization",
+    "description": "Operating system synchronization modeled using permutation groups, with scheduling in Sn, mutual exclusion as stabilizers, and round-robin fairness as cyclic actions, verified in Python.",
+    "language": "Python",
+    "url": "https://github.com/04pranab/os-symmetry-synchronization",
     "rank": 1
   },
   {
     "id": 2,
-    "name": "os-bootloader",
-    "description": "Custom OS bootloader targeting x86-64 architecture. Implements real mode to protected mode transition with GDT setup.",
-    "language": "Assembly",
-    "url": "https://github.com/04pranab/os-bootloader",
+    "name": "network-queue-control",
+    "description": "A variational approach to network queue control showing that constant-rate packet injection minimizes delay and queue growth under convex cost models, linking calculus of variations with OS networking.",
+    "language": "Python",
+    "url": "https://github.com/04pranab/network-queue-control",
     "rank": 2
   },
   {
     "id": 3,
-    "name": "cache-simulator",
-    "description": "Multi-level cache hierarchy simulator. Analyzes cache hit/miss patterns and performance metrics for different memory access patterns.",
+    "name": "energy-optimal-cpu-scheduler",
+    "description": "An educational exploration of energy-aware CPU scheduling, studying how execution timing can minimize power for fixed workloads and illustrating DVFS and performance–power trade-offs in modern processors.",
     "language": "Python",
-    "url": "https://github.com/04pranab/cache-simulator",
+    "url": "https://github.com/04pranab/energy-optimal-cpu-scheduler",
     "rank": 3
   }
 ]

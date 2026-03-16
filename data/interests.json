@@ -22,37 +22,9 @@
   },
   {
     "id": 4,
-    "title": "Bare-Metal Programming",
-    "description": "Low-level programming without OS abstractions, bootloaders, and firmware development.",
-    "rank": 4,
-    "status": "Learning"
-  },
-  {
-    "id": 5,
     "title": "Processor Microarchitecture",
     "description": "Pipeline design, cache hierarchies, branch prediction, and out-of-order execution.",
-    "rank": 5,
-    "status": "Learning"
-  },
-  {
-    "id": 6,
-    "title": "Hardware–Software Co-design",
-    "description": "Optimization at the boundary between hardware and software, system-level tradeoffs.",
-    "rank": 6,
-    "status": "Learning"
-  },
-  {
-    "id": 7,
-    "title": "FPGA-based Prototyping",
-    "description": "Implementing and validating hardware designs using FPGAs.",
-    "rank": 7,
-    "status": "Learning"
-  },
-  {
-    "id": 8,
-    "title": "Performance Analysis",
-    "description": "Identifying bottlenecks, profiling systems, and understanding performance characteristics.",
-    "rank": 8,
+    "rank": 4,
     "status": "Learning"
   }
 ]
