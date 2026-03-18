@@ -1,0 +1,33 @@
+{
+  "updated": "Feb 2026",
+  "reading": [
+    {
+      "title": "RISC-V Manual Volume I: User-Level ISA",
+      "note": "The RISC-V instruction set architecture, which is the basis for my work on a RISC-V emulator and kernel"
+    },
+    {
+      "title": "Contemporary Abstract Algebra",
+      "note": "Gallian — a very readable introduction to group theory, with applications to cryptography and coding theory"
+    }
+  ],
+  "building": [
+    {
+      "title": "RISC-V emulator in C",
+      "note": "RV32I base ISA, working toward privileged spec"
+    },
+    {
+      "title": "Formalizing Sn scheduler model",
+      "note": "extending the permutation group OS synchronization paper"
+    }
+  ],
+  "thinking": [
+    {
+      "title": "Can the redundant structure in a design be model in Group Theory and identifed by the automorphism group of the design?",
+      "note": null
+    },
+    {
+      "title": "What to eat? Suggestions @ my main email down or LinkedIn",
+      "note": null
+    }
+  ]
+}

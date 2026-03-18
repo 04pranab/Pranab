@@ -2,29 +2,36 @@
   {
     "id": 1,
     "title": "Computer Architecture",
-    "description": "Design principles, instruction sets, and performance optimization at the architectural level.",
+    "description": "Instruction set design, microarchitectural tradeoffs, and performance optimization across the hardware stack.",
     "rank": 1,
-    "status": "Learning"
+    "status": "Active"
   },
   {
     "id": 2,
     "title": "RISC-V Systems",
-    "description": "Open-source instruction set architecture and its applications in systems design.",
+    "description": "Open ISA as a substrate for systems research — bare-metal bring-up, custom extensions, and toolchain construction.",
     "rank": 2,
-    "status": "Learning"
+    "status": "Active"
   },
   {
     "id": 3,
     "title": "Operating System Design",
-    "description": "Kernel architecture, memory management, scheduling, and system call interfaces.",
+    "description": "Kernel internals, virtual memory, process scheduling, and the mechanisms that bridge hardware to userspace.",
     "rank": 3,
-    "status": "Learning"
+    "status": "Active"
   },
   {
     "id": 4,
     "title": "Processor Microarchitecture",
-    "description": "Pipeline design, cache hierarchies, branch prediction, and out-of-order execution.",
+    "description": "Pipeline stages, cache hierarchies, branch predictors, and the micro-level choices that determine real-world throughput.",
     "rank": 4,
-    "status": "Learning"
+    "status": "Active"
+  },
+  {
+    "id": 5,
+    "title": "Group-Theoretic Mathematical Modeling",
+    "description": "Applying algebraic structures — permutation groups, stabilizers, cyclic actions in Sn — to formally model OS primitives such as synchronization, scheduling fairness, and concurrency invariants.",
+    "rank": 5,
+    "status": "Active"
   }
 ]
