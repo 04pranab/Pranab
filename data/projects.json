@@ -1,26 +1,34 @@
 [
   {
     "id": 1,
-    "name": "os-symmetry-synchronization",
-    "description": "Operating system synchronization modeled using permutation groups, with scheduling in Sn, mutual exclusion as stabilizers, and round-robin fairness as cyclic actions, verified in Python.",
-    "language": "Python",
-    "url": "https://github.com/04pranab/os-symmetry-synchronization",
+    "name": "net-ingress",
+    "description": "A network ingress subsystem written in C — built to understand what actually happens to raw bytes when they first enter an operating system, before any socket exists or application sees them.",
+    "language": "C",
+    "url": "https://github.com/04pranab/net-ingress",
     "rank": 1
   },
   {
     "id": 2,
-    "name": "network-queue-control",
-    "description": "A variational approach to network queue control showing that constant-rate packet injection minimizes delay and queue growth under convex cost models, linking calculus of variations with OS networking.",
+    "name": "os-symmetry-synchronization",
+    "description": "Operating system synchronization modeled using permutation groups, with scheduling in Sn, mutual exclusion as stabilizers, and round-robin fairness as cyclic actions, verified in Python.",
     "language": "Python",
-    "url": "https://github.com/04pranab/network-queue-control",
+    "url": "https://github.com/04pranab/os-symmetry-synchronization",
     "rank": 2
   },
   {
     "id": 3,
+    "name": "network-queue-control",
+    "description": "A variational approach to network queue control showing that constant-rate packet injection minimizes delay and queue growth under convex cost models, linking calculus of variations with OS networking.",
+    "language": "Python",
+    "url": "https://github.com/04pranab/network-queue-control",
+    "rank": 3
+  },
+  {
+    "id": 4,
     "name": "energy-optimal-cpu-scheduler",
     "description": "An educational exploration of energy-aware CPU scheduling, studying how execution timing can minimize power for fixed workloads and illustrating DVFS and performance–power trade-offs in modern processors.",
     "language": "Python",
     "url": "https://github.com/04pranab/energy-optimal-cpu-scheduler",
-    "rank": 3
+    "rank": 4
   }
 ]
