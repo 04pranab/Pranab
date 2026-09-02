@@ -1,0 +1,76 @@
+[
+    {
+        "slug": "risc-v-as-a-research-platform",
+        "date": "2026-08-30",
+        "readTime": "7 min read",
+        "title": "RISC-V as a Research Platform",
+        "excerpt": "Why an open instruction set becomes much more interesting when the goal is not just to run programs, but to understand the machine underneath them.",
+        "body": [
+            "RISC-V is interesting to me for a reason that goes beyond the instruction set itself. It gives researchers a relatively open platform on which questions about architecture, operating systems, compilers and hardware can be explored without treating the processor as a black box.",
+            "When working close to the machine, a simple program becomes a useful experiment. An instruction is fetched, decoded, executed and eventually produces a change in architectural state. Following that path forces us to connect abstractions that are usually taught separately.",
+            "This is one reason I have been exploring RISC-V alongside operating systems and computer architecture. Writing small programs in C and assembly is one layer. Running them through an emulator or simulator is another. Looking at what the simulated processor actually does is where things become much more interesting.",
+            "The deeper lesson is that computer architecture is not simply a collection of instructions. It is a study of how an abstract machine becomes a physical or simulated system with timing, memory behaviour, pipelines, caches and many other constraints.",
+            "For research, that makes RISC-V more than a CPU architecture. It becomes a laboratory."
+        ]
+    },
+    {
+        "slug": "what-gem5-teaches-about-computer-architecture",
+        "date": "2026-08-24",
+        "readTime": "8 min read",
+        "title": "What gem5 Actually Teaches About Computer Architecture",
+        "excerpt": "Simulation makes processor behaviour visible, but the moment you look closely, the machine becomes far more complicated than the textbook pipeline.",
+        "body": [
+            "A computer architecture diagram can make a processor look wonderfully tidy. Fetch, decode, execute, memory and writeback fit into a few boxes. Real processor behaviour is considerably less polite.",
+            "Working with gem5 has been one way for me to move from diagrams toward experiments. Instead of only asking how an architecture should work, I can ask what happens when a particular program is executed under a particular CPU model.",
+            "This becomes especially interesting with out-of-order execution. Instructions do not necessarily complete in the same order in which the program presents them. Dependencies, speculation, queues and execution resources all influence what the processor can actually do.",
+            "Debugging a simulation can therefore become an architecture lesson. A stalled instruction stream, an unexpected memory access or a program that refuses to make forward progress can reveal something about the interaction between software and the simulated machine.",
+            "The most useful part is not memorizing the simulator's configuration options. It is learning to treat the simulator as an experimental instrument. A good experiment starts with a precise question, changes one meaningful variable, observes the machine and then tries to explain the result."
+        ]
+    },
+    {
+        "slug": "learning-through-derivatives",
+        "date": "2026-08-20",
+        "readTime": "6 min read",
+        "title": "Learning Through Derivatives",
+        "excerpt": "A visual look at what a neural network is actually doing when it learns, and why the derivative is the mechanism that makes the process possible.",
+        "body": [
+            "The phrase 'the neural network learns' can make learning sound almost magical. It is not. Underneath the terminology is a repeated numerical process: measure an error, calculate how the error changes with respect to the parameters, and update those parameters.",
+            "The derivative is the key piece. If changing a parameter slightly makes the loss increase, the gradient tells us that the parameter should move in the opposite direction. If the loss decreases, the update moves accordingly.",
+            "I find this easier to understand visually than through equations alone. Plotting the loss as a function of a parameter turns gradient descent into a physical-looking movement across a surface. The network is not 'thinking' its way toward the answer. It is navigating a mathematical landscape.",
+            "Backpropagation extends this idea through multiple layers. The chain rule lets us determine how a change at one parameter eventually affects the final loss, even when many intermediate operations sit between them.",
+            "Building small neural networks and plotting each stage makes the distinction between forward propagation and learning much clearer. Forward propagation produces a prediction. Backpropagation determines how the parameters contributed to the error. The update then changes the parameters.",
+            "That small loop is the engine behind a surprisingly large part of modern machine learning."
+        ]
+    },
+    {
+        "slug": "when-direction-matters-more-than-magnitude",
+        "date": "2026-08-16",
+        "readTime": "7 min read",
+        "title": "When Direction Matters More Than Magnitude",
+        "excerpt": "An experiment with magnitude-direction representations and the question of whether separating these two components can reveal structure that ordinary representations hide.",
+        "body": [
+            "Most machine learning pipelines treat a feature vector as one object. But a vector contains at least two different pieces of information: its magnitude and its direction.",
+            "For a non-zero vector x, we can write x = r u, where r is the norm of x and u is the normalized direction. This simple decomposition creates an interesting question: what happens if we ask a model to learn from these components separately?",
+            "In my experiments, magnitude alone was surprisingly weak for the classification task, while direction carried substantially more information. Combining the two gave a small improvement over direction alone.",
+            "This led to a broader question. Perhaps the important issue is not simply whether magnitude and direction are useful, but how they interact. Instead of concatenating them, we can allow magnitude to condition the directional representation.",
+            "This line of experimentation became part of my exploration of spherical representations and the Spherical Representation Transformation Neuron framework. The interesting part is not that one representation wins on one dataset. It is the possibility of identifying datasets where the geometry of the representation itself carries useful information.",
+            "For me, this is one of the appealing parts of mathematical machine learning. A small algebraic transformation can become an experimental question about how a model should represent information."
+        ]
+    },
+    {
+        "slug": "building-a-lowbit-trace-corpus",
+        "date": "2026-08-10",
+        "readTime": "8 min read",
+        "title": "Building a Low-Bit Trace Corpus",
+        "excerpt": "A research direction combining program traces, computer architecture and low-bit computation to build a benchmark for studying real workloads.",
+        "body": [
+            "Benchmarks are useful because they turn vague claims about performance into measurable experiments. But a benchmark is only as interesting as the questions it allows us to ask.",
+            "My current interest is in building a trace corpus around low-bit computing. The goal is not simply to collect execution traces, but to create a structured dataset that can connect programs with architectural behaviour.",
+            "The basic idea is to run a diverse collection of programs, collect relevant execution information and organize the resulting traces so that they can be reused for analysis and benchmarking. A corpus of hundreds of programs can reveal patterns that a handful of hand-picked examples cannot.",
+            "This becomes particularly interesting when the workloads span different computational characteristics. Integer-heavy programs, numerical workloads, cryptographic routines, system programs and other categories can stress different parts of a processor in different ways.",
+            "The project also connects several areas I am interested in: RISC-V, computer architecture, operating systems, benchmarking and machine learning. The trace is the bridge between the software workload and the machine executing it.",
+            "A useful trace corpus should therefore be more than a folder full of logs. It should have a reproducible generation pipeline, clear metadata, well-defined metrics and enough structure that other researchers can ask new questions of the same data.",
+            "That is the part I find most exciting: building infrastructure that can become an experimental foundation rather than a one-off experiment."
+        ]
+    }
+]

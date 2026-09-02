@@ -5,164 +5,291 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
-    content="Om Pranab Mohanty — Undergraduate researcher in Computer Architecture, Operating Systems, and RISC-V systems.">
+    content="Om Pranab Mohanty — undergraduate researcher in computer architecture, operating systems and performance engineering.">
   <meta name="author" content="Om Pranab Mohanty">
-  <meta name="theme-color" content="#050709">
-  <meta name="robots" content="index, follow">
-  <title>Om Pranab Mohanty</title>
-  <link rel="canonical" href="https://04pranab.github.io">
+  <meta name="theme-color" content="#0b0c0f">
+  <title>Om Pranab Mohanty — Systems Researcher</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Syne:wght@600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="app">
 
-  <!-- NAV -->
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo">om-pa</a>
-      <ul class="nav-links">
-        <li><a href="#about">about</a></li>
-        <li><a href="#research">research</a></li>
-        <li><a href="#projects">projects</a></li>
-        <li><a href="#publications">papers</a></li>
-        <li><a href="#now">now</a></li>
-        <li><a href="#contact">contact</a></li>
-        <li><a href="data/cv.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">[cv]</a></li>
-      </ul>
-    </div>
-  </nav>
+    <!-- ICON NAV -->
+    <header class="topnav" aria-label="Section navigation">
+      <span class="topnav-mark">om&#8203;/pa</span>
+      <nav class="topnav-pill" id="topnav-icons">
+        <button class="nav-icon" data-view="home" aria-current="page" aria-label="Home" title="Home">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 11.5 12 4l9 7.5" />
+            <path d="M5.5 10v9h13v-9" />
+            <path d="M10 19v-5h4v5" />
+          </svg>
+        </button>
+        <button class="nav-icon" data-view="projects" aria-label="Projects" title="Projects">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M3 8.5V18a1.5 1.5 0 0 0 1.5 1.5h15A1.5 1.5 0 0 0 21 18V9.5A1.5 1.5 0 0 0 19.5 8H12l-2-2.5H4.5A1.5 1.5 0 0 0 3 7v1.5Z" />
+          </svg>
+        </button>
+        <button class="nav-icon" data-view="work" aria-label="Experience and research"
+          title="Experience &amp; research">
+          <svg viewBox="0 0 24 24">
+            <rect x="3.5" y="7.5" width="17" height="12" rx="1.2" />
+            <path d="M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5" />
+            <path d="M3.5 12.5h17" />
+          </svg>
+        </button>
+        <button class="nav-icon" data-view="tools" aria-label="Skills and tools" title="Skills &amp; tools">
+          <svg viewBox="0 0 24 24">
+            <path d="M14.7 6.3a4 4 0 0 0-5.4 4.9L4 16.5V20h3.5l5.3-5.3a4 4 0 0 0 4.9-5.4l-2.6 2.6-2-2Z" />
+          </svg>
+        </button>
+        <button class="nav-icon" data-view="blog" aria-label="Writing" title="Writing">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 19.5V6a2 2 0 0 1 2-2h8.5L20 8.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-.5Z" />
+            <path d="M14 4v4.5h4.5" />
+            <path d="M8 13h8M8 16.5h5.5" />
+          </svg>
+        </button>
+        <button class="nav-icon" data-view="contact" aria-label="Contact" title="Contact">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 6.5h16v11H4z" />
+            <path d="m4 7 8 6 8-6" />
+          </svg>
+        </button>
+      </nav>
+      <a class="topnav-cv" href="assets/om-pranab-mohanty-cv.pdf" target="_blank" rel="noopener"
+        aria-label="Download résumé" title="Résumé">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 3v12m0 0 4-4m-4 4-4-4" />
+          <path d="M4 17v2.5A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5V17" />
+        </svg>
+      </a>
+    </header>
 
-  <!-- HERO -->
-  <section id="hero" class="hero">
-    <canvas id="heroCanvas"></canvas>
-    <div class="hero-content">
-      <div class="hero-terminal-chrome">
-        <div class="chrome-dot"></div>
-        <div class="chrome-dot"></div>
-        <div class="chrome-dot"></div>
-        <span class="chrome-title">bash — research@04pranab:~</span>
-      </div>
-      <p class="hero-tag">undergraduate researcher</p>
-      <h1 class="hero-name reveal-up" style="--d:320ms">Om Pranab<br><em>Mohanty</em></h1>
-      <p class="hero-stack reveal-up" style="--d:420ms">
-        <span>Computer Architecture</span>
-        <span class="sep">·</span>
-        <span>Operating Systems</span>
-        <span class="sep">·</span>
-        <span>RISC-V</span>
-        <span class="sep">·</span>
-        <span>Group Theory</span>
-      </p>
-      <div class="hero-cta reveal-up" style="--d:520ms">
-        <a href="#about" class="btn-primary">./explore</a>
-        <a href="#contact" class="btn-ghost">./contact</a>
-      </div>
-    </div>
-    <div class="hero-scroll">scroll ↓</div>
-  </section>
+    <div class="shell">
 
-  <main>
+      <!-- PROFILE SIDEBAR -->
+      <aside class="side" id="side">
+        <div class="side-card">
+          <div class="portrait">
+            <img src="assets/portrait.jpg" alt="Portrait of Om Pranab Mohanty" width="900" height="900">
 
-    <!-- ABOUT -->
-    <section id="about" class="section">
-      <div class="container">
-        <label class="section-label">01 / about</label>
-        <div class="about-grid">
-          <h2 class="about-heading">Building systems<br>from <em>first principles.</em></h2>
-          <div class="about-body">
-            <p>Undergraduate researcher focused on systems programming, processor architecture, and OS internals —
-              probing how hardware and software negotiate at the lowest level of the stack.</p>
-            <p>Independent and hands-on: constructing toolchains, writing bare-metal code, and reasoning about
-              correctness before performance. RISC-V is the primary lens; group theory is the unexpected one.</p>
           </div>
+          <h1 class="side-name">Om Pranab<br>Mohanty</h1>
+          <p class="side-role">Undergrad researcher, Mathematical Sciences &amp; Computing</p>
+
+          <div class="side-status">
+            <span class="status-text">rank 1 in cohort · SSSIHL</span>
+          </div>
+
+          <p class="side-blurb">Focused on computer architecture, operating systems and performance engineering — with a
+            parallel thread of using group theory to model OS behaviour.</p>
+
+          <ul class="side-links">
+            <li><a href="https://github.com/04pranab" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.35 4.68-4.58 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" />
+                </svg>
+              </a></li>
+            <li><a href="https://www.linkedin.com/in/om-pranab-mohanty/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M6.94 8.5H4V20h2.94V8.5ZM5.47 4a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4ZM20 20v-6.4c0-3.06-1.63-4.49-3.8-4.49-1.75 0-2.53 1-2.97 1.68V8.5H10.3c.04.85 0 11.5 0 11.5h2.93v-6.42c0-.34.02-.68.12-.93.27-.68.9-1.39 1.94-1.39 1.37 0 1.92 1.05 1.92 2.58V20H20Z" />
+                </svg>
+              </a></li>
+            <li><a href="https://04pranab.github.io/UnSent/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 19.5V6a2 2 0 0 1 2-2h8.5L20 8.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-.5Z" />
+                  <path d="M14 4v4.5h4.5" />
+                  <path d="M8 13h8M8 16.5h5.5" />
+                </svg>
+              </a></li>
+            <li><a href="https://04pranab.github.io/lowBit/" target="_blank" rel="noopener">
+                lB
+              </a></li>
+
+            <li><a href="mailto:ompranabmohanty@gmail.com">
+                @
+              </a></li>
+          </ul>
+          </ul>
+
+          <a class="side-cta" href="assets/om-pranab-mohanty-cv.pdf" target="_blank" rel="noopener">Download résumé
+            <span>&darr;</span></a>
         </div>
-      </div>
-    </section>
 
-    <!-- RESEARCH -->
-    <section id="research" class="section">
-      <div class="container">
-        <label class="section-label">02 / research interests</label>
-        <div id="interests-container" class="interests-list"></div>
-      </div>
-    </section>
+        <p class="side-foot">Puttaparthi, Andhra Pradesh, India</p>
+      </aside>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="section">
-      <div class="container">
-        <label class="section-label">03 / projects</label>
-        <div id="projects-container" class="projects-list"></div>
-      </div>
-    </section>
+      <!-- MAIN VIEWS -->
+      <main class="main">
 
-    <!-- PUBLICATIONS -->
-    <section id="publications" class="section">
-      <div class="container">
-        <label class="section-label">04 / papers</label>
-        <div id="publications-container" class="pub-list"></div>
-      </div>
-    </section>
+        <!-- HOME -->
+        <section class="view" id="view-home" data-view="home">
 
-    <!-- NOW -->
-    <section id="now" class="section">
-      <div class="container">
-        <label class="section-label">06 / now</label>
-        <div class="now-header">
-          <p class="now-intro">A snapshot of what I'm currently up to...</p>
-          <span class="now-updated" id="now-updated"></span>
-        </div>
-        <div id="now-container" class="now-grid"></div>
-      </div>
-    </section>
+          <div class="hero">
+            <p class="hero-eyebrow">B.S. (Hons. with Research), specialising in Artificial Intelligence</p>
+            <h2 class="hero-head">
+              <span class="line line-solid">Systems &amp;</span>
+              <span class="line line-ghost">architecture.</span>
+            </h2>
+            <p class="hero-sub">I build and reason about the layer where hardware and software negotiate — processor
+              microarchitecture, OS internals, and the benchmarks that measure what's actually happening underneath.
+              Group theory shows up more often than you'd expect.</p>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section section-last">
-      <div class="container">
-        <label class="section-label">07 / contact</label>
-        <h2 class="contact-heading">Let's connect.</h2>
-        <div class="contact-list">
-          <button id="email-row" class="contact-row contact-row-btn">
-            <span class="contact-type">email</span>
-            <span class="contact-value">ompranabmohanty@gmail.com</span>
-            <span class="contact-arrow">↗</span>
-          </button>
-          <a href="https://github.com/04pranab" target="_blank" rel="noopener noreferrer" class="contact-row">
-            <span class="contact-type">github</span>
-            <span class="contact-value">github.com/04pranab</span>
-            <span class="contact-arrow">↗</span>
-          </a>
-          <a href="https://www.linkedin.com/in/om-pranab-mohanty/" target="_blank" rel="noopener noreferrer"
-            class="contact-row">
-            <span class="contact-type">linkedin</span>
-            <span class="contact-value">linkedin.com/in/om-pranab-mohanty</span>
-            <span class="contact-arrow">↗</span>
-          </a>
-          <a href="https://04pranab.github.io/UnSent/" target="_blank" rel="noopener noreferrer"
-            class="contact-row">
-            <span class="contact-type">UnSent</span>
-            <span class="contact-value">Actually, I am an Occasional Writer also!</span>
-            <span class="contact-arrow">↗</span>
-          </a>
-        </div>
-      </div>
-    </section>
+            <div class="hero-stats" id="hero-stats">
+              <div class="stat">
+                <span class="stat-num" data-count="4">0</span>
+                <span class="stat-label">projects shipped</span>
+              </div>
+              <div class="stat">
+                <span class="stat-num" data-count="1">0</span>
+                <span class="stat-label">paper in preparation</span>
+              </div>
+              <div class="stat">
+                <span class="stat-num" data-count="8.5">0</span>
+                <span class="stat-label">CGPA &middot; 10</span>
+              </div>
+            </div>
+          </div>
 
+          <div class="hero-tiles">
+            <div class="tile tile-amber">
+              <span class="tile-tag">now building</span>
+              <p class="tile-title" id="tile-building-title">RISC-V emulator in C</p>
+              <p class="tile-note" id="tile-building-note">RV32I base ISA, working toward the privileged spec.</p>
+            </div>
+            <div class="tile tile-teal">
+              <span class="tile-tag">now reading</span>
+              <p class="tile-title" id="tile-reading-title">RISC-V Manual, Volume I</p>
+              <p class="tile-note" id="tile-reading-note">The user-level ISA behind my emulator and kernel work.</p>
+            </div>
+          </div>
 
-  </main>
+          <div class="home-list">
+            <div class="home-list-head">
+              <h3>Research interests</h3>
+              <button class="link-more" data-goto="work">see experience &amp; papers <span>&rarr;</span></button>
+            </div>
+            <div id="interests-list" class="interest-rows"></div>
+          </div>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <span>© 2026 v.05 Om Pranab Mohanty</span>
-      <span class="footer-note"> >>> Paropakaram Idam Sariram</span>
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="view" id="view-projects" data-view="projects" hidden>
+          <h2 class="view-head"><span class="line-solid">Recent</span><span class="line-ghost">projects.</span></h2>
+          <p class="view-sub">Small, deterministic systems built to understand one mechanism at a time — from raw packet
+            ingress to synchronization modeled as group actions.</p>
+          <div id="projects-list" class="row-list"></div>
+        </section>
+
+        <!-- WORK / EXPERIENCE / RESEARCH -->
+        <section class="view" id="view-work" data-view="work" hidden>
+          <h2 class="view-head"><span class="line-solid">Experience</span><span class="line-ghost">&amp;
+              research.</span></h2>
+          <p class="view-sub">Coursework and a research internship, alongside a paper formalising OS synchronization
+            with permutation groups.</p>
+
+          <div class="timeline" id="timeline-list"></div>
+
+          <div class="home-list-head" style="margin-top:2.5rem">
+            <h3>Publications</h3>
+          </div>
+          <div id="pubs-list" class="row-list"></div>
+        </section>
+
+        <!-- TOOLS -->
+        <section class="view" id="view-tools" data-view="tools" hidden>
+          <h2 class="view-head"><span class="line-solid">Skills</span><span class="line-ghost">&amp; tools.</span></h2>
+          <p class="view-sub">What I reach for day to day, grouped by where it sits in the stack.</p>
+          <div id="tools-grid" class="tools-grid"></div>
+        </section>
+
+        <!-- BLOG LIST -->
+        <section class="view" id="view-blog" data-view="blog" hidden>
+          <h2 class="view-head"><span class="line-solid">Thoughts &amp;</span><span class="line-ghost">writing.</span></h2>
+          <p class="view-sub">Short write-ups from whatever I'm building or proving at the time.</p>
+          <div id="blog-list" class="blog-rows"></div>
+        </section>
+
+        <!-- BLOG POST DETAIL -->
+        <section class="view" id="view-blogpost" data-view="blogpost" hidden>
+          <button class="link-more blog-back" data-goto="blog"><span>&larr;</span> all writing</button>
+          <div class="blog-post-meta">
+            <span id="blogpost-date"></span>
+            <span class="blog-post-dot">&middot;</span>
+            <span id="blogpost-readtime"></span>
+          </div>
+          <h2 class="blog-post-title" id="blogpost-title"></h2>
+          <div class="blog-post-body" id="blogpost-body"></div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="view" id="view-contact" data-view="contact" hidden>
+          <h2 class="view-head"><span class="line-solid">Let's</span><span class="line-ghost">talk.</span></h2>
+          <p class="view-sub">Open to research collaborations, systems internships, and conversations about RISC-V, OS
+            design, or where group theory sneaks into computing.</p>
+
+          <ul class="contact-rows">
+            <li><a href="mailto:ompranabmohanty@gmail.com"><span>email</span><b>ompranabmohanty@gmail.com</b><span
+                  class="arrow">&#8599;</span></a></li>
+            <li><a href="https://github.com/04pranab" target="_blank"
+                rel="noopener"><span>github</span><b>github.com/04pranab</b><span class="arrow">&#8599;</span></a></li>
+            <li><a href="https://www.linkedin.com/in/om-pranab-mohanty/" target="_blank"
+                rel="noopener"><span>linkedin</span><b>linkedin.com/in/om-pranab-mohanty</b><span
+                  class="arrow">&#8599;</span></a></li>
+            <li><a href="https://04pranab.github.io/UnSent/" target="_blank"
+                rel="noopener"><span>writing</span><b>UnSent — occasional essays</b><span
+                  class="arrow">&#8599;</span></a></li>
+          </ul>
+
+          <!--
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="form-row">
+              <label for="f-name">Name</label>
+              <input id="f-name" name="name" type="text" placeholder="Your name" required>
+            </div>
+            <div class="form-row">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" placeholder="you@domain.com" required>
+            </div>
+            <div class="form-row">
+              <label for="f-topic">Topic</label>
+              <select id="f-topic" name="topic">
+                <option value="research">Research collaboration</option>
+                <option value="internship">Internship / role</option>
+                <option value="project">A project of mine</option>
+                <option value="other">Something else</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="f-msg">Message</label>
+              <textarea id="f-msg" name="message" rows="4" placeholder="What's on your mind?" required></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send message</button>
+            <p class="form-note" id="form-note" role="status"></p>
+          </form>-->
+        </section>
+
+      </main>
     </div>
-  </footer>
+
+    <footer class="footer">
+      <span>&copy; 2026 Om Pranab Mohanty</span>
+      <span class="footer-note">Paropakaram Idam Sariram</span>
+    </footer>
+
+  </div>
 
   <script src="script.js"></script>
 </body>

@@ -3,35 +3,30 @@
     "id": 1,
     "title": "Computer Architecture",
     "description": "Instruction set design, microarchitectural tradeoffs, and performance optimization across the hardware stack.",
-    "rank": 1,
-    "status": "Active"
+    "rank": 1
   },
   {
     "id": 2,
     "title": "RISC-V Systems",
     "description": "Open ISA as a substrate for systems research — bare-metal bring-up, custom extensions, and toolchain construction.",
-    "rank": 2,
-    "status": "Active"
+    "rank": 2
   },
   {
     "id": 3,
     "title": "Operating System Design",
     "description": "Kernel internals, virtual memory, process scheduling, and the mechanisms that bridge hardware to userspace.",
-    "rank": 3,
-    "status": "Active"
+    "rank": 3
   },
   {
     "id": 4,
     "title": "Processor Microarchitecture",
     "description": "Pipeline stages, cache hierarchies, branch predictors, and the micro-level choices that determine real-world throughput.",
-    "rank": 4,
-    "status": "Active"
+    "rank": 4
   },
   {
     "id": 5,
-    "title": "Group-Theoretic Mathematical Modeling",
+    "title": "Group-Theoretic Modeling",
     "description": "Applying algebraic structures — permutation groups, stabilizers, cyclic actions in Sn — to formally model OS primitives such as synchronization, scheduling fairness, and concurrency invariants.",
-    "rank": 5,
-    "status": "Active"
+    "rank": 5
   }
 ]

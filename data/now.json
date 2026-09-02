@@ -12,8 +12,8 @@
   ],
   "building": [
     {
-      "title": "RISC-V emulator in C",
-      "note": "RV32I base ISA, working toward privileged spec"
+      "title": "RISC-V Microbenchmarks in C",
+      "note": "RISC-V-First Platform for Branch-Prediction and Cache-Behavior Characterization"
     },
     {
       "title": "Formalizing Sn scheduler model",

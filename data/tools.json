@@ -1,0 +1,22 @@
+[
+  {
+    "category": "systems & architecture",
+    "items": ["Computer architecture", "Operating systems", "Computer networks"],
+    "rank": 1
+  },
+  {
+    "category": "programming",
+    "items": ["C / C++", "Python", "SQL", "Bash"],
+    "rank": 2
+  },
+  {
+    "category": "mathematics",
+    "items": ["Discrete mathematics", "Linear algebra", "Optimization", "Probability", "Abstract algebra"],
+    "rank": 3
+  },
+  {
+    "category": "tooling",
+    "items": ["Git", "Linux", "CMake"],
+    "rank": 4
+  }
+]

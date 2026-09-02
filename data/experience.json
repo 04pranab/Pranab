@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "org": "Research Intern, Manipal Institute of Virology",
+    "date": "Mar 2026 — present",
+    "description": "VAE-based modeling of long-term genomic data for dengue serotype analysis, focused on large-scale data representation and computational constraints.",
+    "rank": 1
+  },
+  {
+    "id": 2,
+    "org": "B.S. Mathematical Sciences and Computing (Hons. with Research), SSSIHL",
+    "date": "Jul 2023 — present",
+    "description": "Specialising in Artificial Intelligence. CGPA 8.4/10, rank 1 in cohort. Coursework spans operating systems, computer architecture, networks, algorithms, and abstract algebra.",
+    "rank": 2
+  },
+  {
+    "id": 3,
+    "org": "Secretary, Speech Craft Society, SSSIHL",
+    "date": "Feb 2025 — Jul 2026",
+    "description": "Led organisation of student sessions on public speaking and structured communication.",
+    "rank": 3
+  },
+  {
+    "id": 4,
+    "org": "Software Engineer Intern - SSSSV",
+    "date": "Aug 2024 — Jun 2025",
+    "description": "(Sri Sathya Sai Vidya Vahini) Contributed to the development of the Dream Drop web application under the SSSVV Inclusive Education Programme, supporting equitable and inclusive education.",
+    "rank": 4
+  }
+]

@@ -1,324 +1,278 @@
-/* ─────────────────────────────────────────────────────────────
-   Om Pranab Mohanty — portfolio script
-   ───────────────────────────────────────────────────────────── */
+/* -----------------------------------------------------------------
+   Om Pranab Mohanty -- portfolio script
+   Data-driven: all content is fetched from data/*.json
+   ----------------------------------------------------------------- */
 
 const DATA = {
   interests:    'data/interests.json',
   projects:     'data/projects.json',
   publications: 'data/publications.json',
+  experience:   'data/experience.json',
+  tools:        'data/tools.json',
   now:          'data/now.json',
+  blog:         'data/blog.json',
 };
+
+let blogPosts = [];
+
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
 function esc(str) {
   return String(str).replace(/[&<>"']/g, c =>
-    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c]));
 }
 
 async function fetchJSON(path) {
   const res = await fetch(path);
   if (!res.ok) throw new Error(`Cannot load ${path}`);
   const data = await res.json();
-  return data.sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0));
+  if (Array.isArray(data)) {
+    return data.sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0));
+  }
+  return data;
 }
 
-// ── Render: Interests ─────────────────────────────────────────
+/* -- Render: research interests ------------------------------- */
 function renderInterests(items) {
-  const el = document.getElementById('interests-container');
+  const el = $('#interests-list');
   if (!el) return;
-  el.innerHTML = items.map((item, i) => `
-    <div class="interest-item" style="--d:${i * 60}ms">
-      <div class="interest-num">[ ${String(i + 1).padStart(2, '0')} ]</div>
-      <div class="interest-title">${esc(item.title)}</div>
-      <p class="interest-desc">${esc(item.description)}</p>
+  el.innerHTML = items.map(item => `
+    <div class="row">
+      <div class="row-title">${esc(item.title)}</div>
+      <div class="row-desc">${esc(item.description)}</div>
     </div>
   `).join('');
 }
 
-// ── Render: Projects ──────────────────────────────────────────
+/* -- Render: projects ------------------------------------------- */
 function renderProjects(items) {
-  const el = document.getElementById('projects-container');
+  const el = $('#projects-list');
   if (!el) return;
-  el.innerHTML = items.map((p, i) => {
-    const name = p.name.replace(/-/g, ' ');
-    return `
-    <a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer"
-       class="project-row" style="--d:${i * 70}ms">
-      <div class="proj-left">
-        <div class="proj-prompt"><span class="prompt-sym">$</span> ./${esc(p.name)}</div>
-        <div class="proj-name">${esc(name)}</div>
-        <p class="proj-desc">${esc(p.description)}</p>
-        <span class="proj-lang">${esc(p.language)}</span>
+  el.innerHTML = items.map(p => `
+    <div class="row-item">
+      <span class="row-lang">${esc(p.language)}</span>
+      <div class="row-body">
+        <h4>${esc(p.name)}</h4>
+        <p>${esc(p.description)}</p>
       </div>
-      <span class="proj-arrow">↗</span>
-    </a>`;
-  }).join('');
-}
-
-// ── Render: Publications ──────────────────────────────────────
-function renderPublications(items) {
-  const el = document.getElementById('publications-container');
-  if (!el) return;
-  el.innerHTML = items.map((pub, i) => `
-    <div class="pub-item" style="--d:${i * 70}ms">
-      <div class="pub-status">${esc(pub.status)}</div>
-      <div class="pub-title">${esc(pub.title)}</div>
-      ${pub.authors ? `<div class="pub-meta">${esc(pub.authors)}</div>` : ''}
-      ${pub.journal ? `<div class="pub-meta">${esc(pub.journal)}</div>` : ''}
-      ${pub.note    ? `<p class="pub-note">${esc(pub.note)}</p>` : ''}
+      <a class="row-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">view &#8599;</a>
     </div>
   `).join('');
 }
 
+/* -- Render: experience timeline --------------------------------- */
+function renderExperience(items) {
+  const el = $('#timeline-list');
+  if (!el) return;
+  el.innerHTML = items.map(t => `
+    <div class="tl-row">
+      <div class="tl-date">${esc(t.date)}</div>
+      <div>
+        <div class="tl-org">${esc(t.org)}</div>
+        <p class="tl-desc">${esc(t.description)}</p>
+      </div>
+    </div>
+  `).join('');
+}
 
-// ── Render: Now ───────────────────────────────────────────────
+/* -- Render: publications ----------------------------------------- */
+function renderPublications(items) {
+  const el = $('#pubs-list');
+  if (!el) return;
+  el.innerHTML = items.map(pub => `
+    <div class="row-item">
+      <span class="pub-status">${esc(pub.status)}</span>
+      <div class="row-body">
+        <h4>${esc(pub.title)}</h4>
+        <p>${esc(pub.note)}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* -- Render: tools -------------------------------------------------- */
+function renderTools(items) {
+  const el = $('#tools-grid');
+  if (!el) return;
+  el.innerHTML = items.map(t => `
+    <div class="tool-card">
+      <div class="tool-cat">${esc(t.category)}</div>
+      <div class="tool-items">${t.items.map(esc).join('<br>')}</div>
+    </div>
+  `).join('');
+}
+
+/* -- Render: now snapshot (home tiles) ------------------------------- */
 function renderNow(data) {
-  const el = document.getElementById('now-container');
-  if (!el || !data) return;
-
-  const categories = [
-    { key: 'reading',  label: 'reading',  icon: '▸' },
-    { key: 'building', label: 'building', icon: '▸' },
-    { key: 'thinking', label: 'thinking', icon: '▸' },
-  ];
-
-  el.innerHTML = categories.map(cat => {
-    const items = data[cat.key];
-    if (!items || !items.length) return '';
-    return `
-      <div class="now-block">
-        <div class="now-cat">${cat.icon} ${cat.label}</div>
-        <ul class="now-items">
-          ${items.map(item => `
-            <li class="now-item">
-              <span class="now-item-title">${esc(item.title)}</span>
-              ${item.note ? `<span class="now-item-note"> — ${esc(item.note)}</span>` : ''}
-            </li>
-          `).join('')}
-        </ul>
-      </div>`;
-  }).join('');
-
-  if (data.updated) {
-    const stamp = document.getElementById('now-updated');
-    if (stamp) stamp.textContent = `last updated: ${esc(data.updated)}`;
+  if (!data) return;
+  const building = data.building && data.building[0];
+  const reading = data.reading && data.reading[0];
+  if (building) {
+    $('#tile-building-title').textContent = building.title;
+    $('#tile-building-note').textContent = building.note || '';
+  }
+  if (reading) {
+    $('#tile-reading-title').textContent = reading.title;
+    $('#tile-reading-note').textContent = reading.note || '';
   }
 }
 
-// ── Copy email to clipboard ────────────────────────────────────
-function setupCopyEmail() {
-  const row = document.getElementById('email-row');
-  if (!row) return;
-  const email = 'ompranabmohanty@gmail.com';
+/* -- Render: blog list ------------------------------------------------ */
+function renderBlogList(items) {
+  const el = $('#blog-list');
+  if (!el) return;
+  el.innerHTML = items.map(p => `
+    <a class="blog-row" href="#/blog/${esc(p.slug)}">
+      <div class="blog-row-meta">
+        <span>${esc(p.date)}</span>
+        <span class="blog-post-dot">&middot;</span>
+        <span>${esc(p.readTime)}</span>
+      </div>
+      <h4>${esc(p.title)}</h4>
+      <p>${esc(p.excerpt)}</p>
+      <span class="row-link">read &#8599;</span>
+    </a>
+  `).join('');
+}
 
-  row.addEventListener('click', async (e) => {
-    e.preventDefault();
-    try {
-      await navigator.clipboard.writeText(email);
-    } catch {
-      const ta = document.createElement('textarea');
-      ta.value = email;
-      ta.style.cssText = 'position:fixed;opacity:0;';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
+/* -- Render: single blog post ----------------------------------------- */
+function renderBlogPost(post) {
+  $('#blogpost-date').textContent = post.date;
+  $('#blogpost-readtime').textContent = post.readTime;
+  $('#blogpost-title').textContent = post.title;
+  $('#blogpost-body').innerHTML = post.body.map(p => `<p>${esc(p)}</p>`).join('');
+}
+
+/* -- View routing ------------------------------------------------------ */
+const views = $$('.view');
+const navIcons = $$('.nav-icon');
+
+function showView(name) {
+  views.forEach(v => v.hidden = v.dataset.view !== name);
+  navIcons.forEach(b => {
+    if (b.dataset.view === name) b.setAttribute('aria-current', 'page');
+    else b.removeAttribute('aria-current');
+  });
+  const active = document.getElementById(`view-${name}`);
+  if (active) {
+    active.classList.remove('view');
+    void active.offsetWidth;
+    active.classList.add('view');
+  }
+  window.scrollTo({ top: 0 });
+  if (location.hash.slice(2) !== name) {
+    history.replaceState(null, '', `#/${name}`);
+  }
+}
+
+function routeFromHash() {
+  const raw = location.hash.replace('#/', '').trim();
+  const [base, slug] = raw.split('/');
+  if (base === 'blog' && slug) {
+    showBlogPost(slug);
+    return;
+  }
+  const name = base || 'home';
+  const valid = navIcons.some(b => b.dataset.view === name);
+  showView(valid ? name : 'home');
+}
+
+function showBlogPost(slug) {
+  const post = blogPosts.find(p => p.slug === slug);
+  if (!post) { showView('blog'); return; }
+  views.forEach(v => v.hidden = v.dataset.view !== 'blogpost');
+  navIcons.forEach(b => {
+    if (b.dataset.view === 'blog') b.setAttribute('aria-current', 'page');
+    else b.removeAttribute('aria-current');
+  });
+  renderBlogPost(post);
+  const active = document.getElementById('view-blogpost');
+  if (active) {
+    active.classList.remove('view');
+    void active.offsetWidth;
+    active.classList.add('view');
+  }
+  window.scrollTo({ top: 0 });
+  if (location.hash !== `#/blog/${slug}`) {
+    history.replaceState(null, '', `#/blog/${slug}`);
+  }
+}
+
+navIcons.forEach(btn => btn.addEventListener('click', () => showView(btn.dataset.view)));
+$$('[data-goto]').forEach(el => el.addEventListener('click', () => showView(el.dataset.goto)));
+window.addEventListener('hashchange', routeFromHash);
+
+/* -- Stat count-up (single load moment) --------------------------------- */
+function animateStats() {
+  const nums = $$('.stat-num');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  nums.forEach(el => {
+    const target = parseFloat(el.dataset.count);
+    if (prefersReduced || !target) { el.textContent = target; return; }
+    const duration = 900;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(target % 1 !== 0 ? 1 : 0);
+      if (p < 1) requestAnimationFrame(tick);
     }
-    const arrow = row.querySelector('.contact-arrow');
-    const val   = row.querySelector('.contact-value');
-    const origArrow = arrow.textContent;
-    const origVal   = val.textContent;
-    arrow.textContent = '✓';
-    val.textContent   = 'copied!';
-    row.classList.add('copied');
-    setTimeout(() => {
-      arrow.textContent = origArrow;
-      val.textContent   = origVal;
-      row.classList.remove('copied');
-    }, 2000);
+    requestAnimationFrame(tick);
   });
 }
-// ── Reveal on scroll ──────────────────────────────────────────
-function setupRevealOnScroll() {
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.06 });
-  document.querySelectorAll('.interest-item, .project-row, .pub-item')
-    .forEach(el => obs.observe(el));
-}
 
-// ── Scroll-spy + nav ──────────────────────────────────────────
-function setupScrollSpy() {
-  const sections = document.querySelectorAll('section[id]');
-  const links    = document.querySelectorAll('.nav-links a');
-  const nav      = document.getElementById('nav');
-  const bar      = document.querySelector('.progress-bar');
-
-  const spy = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      links.forEach(a =>
-        a.classList.toggle('active', a.getAttribute('href') === `#${e.target.id}`));
-    });
-  }, { rootMargin: '-52px 0px -55% 0px' });
-
-  sections.forEach(s => spy.observe(s));
-
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 20);
-    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-    if (bar) bar.style.width = pct + '%';
-  }, { passive: true });
-}
-
-// ── Custom cursor ──────────────────────────────────────────────
-function setupCursor() {
-  const dot = document.getElementById('cursorDot');
-  if (!dot || window.matchMedia('(max-width:640px)').matches) return;
-  let mx = 0, my = 0, cx = 0, cy = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  (function loop() {
-    cx += (mx - cx) * 0.18;
-    cy += (my - cy) * 0.18;
-    dot.style.left = cx + 'px';
-    dot.style.top  = cy + 'px';
-    requestAnimationFrame(loop);
-  })();
-}
-
-// ── Hero canvas — scan-line grid ──────────────────────────────
-function setupHeroCanvas() {
-  const canvas = document.getElementById('heroCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H;
-
-  function resize() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
-
-  const COLS = 28, ROWS = 16;
-  let dots = [];
-
-  function buildDots() {
-    dots = [];
-    for (let r = 0; r < ROWS; r++) {
-      for (let c = 0; c < COLS; c++) {
-        dots.push({
-          ox: (c / (COLS - 1)) * W,
-          oy: (r / (ROWS - 1)) * H,
-          x: 0, y: 0,
-          phase: Math.random() * Math.PI * 2,
-          speed: 0.25 + Math.random() * 0.35,
-          amp:   2 + Math.random() * 4,
-        });
-      }
+/* -- Contact form ---------------------------------------------------------- */
+function setupContactForm() {
+  const form = $('#contact-form');
+  if (!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const note = $('#form-note');
+    const name = $('#f-name').value.trim();
+    const email = $('#f-email').value.trim();
+    const message = $('#f-msg').value.trim();
+    if (!name || !email || !message) {
+      note.textContent = 'Fill in your name, email and message first.';
+      note.style.color = 'var(--amber)';
+      return;
     }
-  }
-
-  let t = 0;
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    t += 0.007;
-
-    dots.forEach(d => {
-      d.x = d.ox + Math.sin(t * d.speed + d.phase) * d.amp;
-      d.y = d.oy + Math.cos(t * d.speed + d.phase * 1.4) * d.amp * 0.5;
-    });
-
-    // Lines
-    const threshold = W / COLS * 1.8;
-    for (let i = 0; i < dots.length; i++) {
-      for (let j = i + 1; j < dots.length; j++) {
-        const dx = dots[i].x - dots[j].x;
-        const dy = dots[i].y - dots[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < threshold) {
-          ctx.globalAlpha = (1 - dist / threshold) * 0.22;
-          ctx.strokeStyle = '#4af0a0';
-          ctx.lineWidth = 0.4;
-          ctx.beginPath();
-          ctx.moveTo(dots[i].x, dots[i].y);
-          ctx.lineTo(dots[j].x, dots[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-    // Dots
-    ctx.globalAlpha = 1;
-    dots.forEach(d => {
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, 1.2, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(74,240,160,0.28)';
-      ctx.fill();
-    });
-
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', () => { resize(); buildDots(); });
-  resize();
-  buildDots();
-  draw();
+    const topic = $('#f-topic').value;
+    const subject = encodeURIComponent(`[Portfolio] ${topic} -- from ${name}`);
+    const body = encodeURIComponent(`${message}\n\n-- ${name} (${email})`);
+    window.location.href = `mailto:ompranabmohanty@gmail.com?subject=${subject}&body=${body}`;
+    note.textContent = 'Opening your email client...';
+    note.style.color = 'var(--teal)';
+  });
 }
 
-// ── Terminal typewriter for hero tag ─────────────────────────
-function setupTypewriter() {
-  const el = document.querySelector('.hero-tag');
-  if (!el) return;
-  const text = el.textContent.trim();
-  el.textContent = '';
-  el.style.opacity = '1';
-  el.style.transform = 'none';
-  el.style.animation = 'none';
-  let i = 0;
-  const cursor = document.createElement('span');
-  cursor.className = 'tw-cursor';
-  cursor.textContent = '█';
-  el.appendChild(cursor);
-  const iv = setInterval(() => {
-    if (i < text.length) {
-      el.insertBefore(document.createTextNode(text[i++]), cursor);
-    } else {
-      clearInterval(iv);
-      setTimeout(() => cursor.style.display = 'none', 800);
-    }
-  }, 45);
-}
-
-// ── Progress bar ──────────────────────────────────────────────
-function injectProgressBar() {
-  const bar = document.createElement('div');
-  bar.className = 'progress-bar';
-  document.body.prepend(bar);
-}
-
-// ── Init ──────────────────────────────────────────────────────
+/* -- Init -------------------------------------------------------------------- */
 async function init() {
-  injectProgressBar();
-  setupCursor();
-  setupHeroCanvas();
-  setupScrollSpy();
-  setupTypewriter();
-
-  setupCopyEmail();
+  setupContactForm();
+  routeFromHash();
+  animateStats();
 
   try {
-    const [interests, projects, publications, now] = await Promise.all([
+    const [interests, projects, publications, experience, tools, now, blog] = await Promise.all([
       fetchJSON(DATA.interests),
       fetchJSON(DATA.projects),
       fetchJSON(DATA.publications),
+      fetchJSON(DATA.experience),
+      fetchJSON(DATA.tools),
       fetch(DATA.now).then(r => r.ok ? r.json() : null).catch(() => null),
+      fetchJSON(DATA.blog),
     ]);
     renderInterests(interests);
     renderProjects(projects);
     renderPublications(publications);
+    renderExperience(experience);
+    renderTools(tools);
     renderNow(now);
-    setupRevealOnScroll();
+    blogPosts = blog;
+    renderBlogList(blogPosts);
+    routeFromHash();
   } catch (err) {
-    console.error('Failed to load data:', err);
+    console.error('Failed to load site data:', err);
   }
 }
 
