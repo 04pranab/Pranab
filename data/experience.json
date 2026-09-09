@@ -3,7 +3,15 @@
     "id": 1,
     "org": "Research Intern, Manipal Institute of Virology",
     "date": "Mar 2026 — present",
-    "description": "VAE-based modeling of long-term genomic data for dengue serotype analysis, focused on large-scale data representation and computational constraints.",
+    "description": "Working on VAE-based modeling of long-term genomic data for dengue serotype analysis, with an emphasis on representation learning and computational handling of large biological datasets.",
+    "skills": [
+      "Python",
+      "Deep Learning",
+      "Variational Autoencoders",
+      "Representation Learning",
+      "Genomic Data"
+    ],
+    "outcomes": "Developing computational approaches for representing and analysing long-term genomic data.",
     "rank": 1
   },
   {
@@ -11,20 +19,43 @@
     "org": "B.S. Mathematical Sciences and Computing (Hons. with Research), SSSIHL",
     "date": "Jul 2023 — present",
     "description": "Specialising in Artificial Intelligence. CGPA 8.4/10, rank 1 in cohort. Coursework spans operating systems, computer architecture, networks, algorithms, and abstract algebra.",
+    "skills": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Computer Architecture",
+      "Operating Systems",
+      "Algorithms",
+      "Networks",
+      "Abstract Algebra"
+    ],
+    "outcomes": "Built a research-oriented foundation connecting mathematical modelling, machine learning, systems, and computer architecture.",
     "rank": 2
   },
   {
     "id": 3,
     "org": "Secretary, Speech Craft Society, SSSIHL",
     "date": "Feb 2025 — Jul 2026",
-    "description": "Led organisation of student sessions on public speaking and structured communication.",
+    "description": "Led organisation of student sessions on public speaking, structured communication, and presentation.",
+    "skills": [
+      "Leadership",
+      "Public Speaking",
+      "Communication",
+      "Event Organisation"
+    ],
+    "outcomes": "Coordinated student-facing activities focused on communication and public speaking.",
     "rank": 3
   },
   {
     "id": 4,
     "org": "Software Engineer Intern - SSSSV",
     "date": "Aug 2024 — Jun 2025",
-    "description": "(Sri Sathya Sai Vidya Vahini) Contributed to the development of the Dream Drop web application under the SSSVV Inclusive Education Programme, supporting equitable and inclusive education.",
+    "description": "Sri Sathya Sai Vidya Vahini. Contributed to the development of the Dream Drop web application under the SSSVV Inclusive Education Programme, supporting equitable and inclusive education.",
+    "skills": [
+      "Software Engineering",
+      "Web Development",
+      "Application Development"
+    ],
+    "outcomes": "Contributed software development work to the Dream Drop web application.",
     "rank": 4
   }
 ]

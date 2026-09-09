@@ -4,22 +4,38 @@
     "name": "LowBIt — benchmarking toolkit",
     "description": "An open-source suite of lightweight, deterministic microbenchmarks for computer architecture and ML performance evaluation. LB-ML-001 implements the transformer scaled dot-product attention kernel with reproducible workloads and reference validation.",
     "language": "C / CMake",
+    "languages": [
+      "C",
+      "CMake"
+    ],
+    "status": "Active",
+    "focus": "Computer Architecture / ML Performance / Benchmarking",
     "url": "https://04pranab.github.io/lowBit/",
     "rank": 1
   },
   {
     "id": 2,
     "name": "net-ingress",
-    "description": "A network ingress subsystem written in C — built to understand what actually happens to raw bytes when they first enter an operating system, before any socket exists or application sees them.",
+    "description": "A network ingress subsystem written in C, built to understand what actually happens to raw bytes when they first enter an operating system, before a socket or application-level interface processes them.",
     "language": "C",
+    "languages": [
+      "C"
+    ],
+    "status": "Active",
+    "focus": "Operating Systems / Networking",
     "url": "https://github.com/04pranab/net-ingress",
     "rank": 2
   },
   {
     "id": 3,
     "name": "os-symmetry-synchronization",
-    "description": "Operating system synchronization modeled using permutation groups, with scheduling in Sn, mutual exclusion as stabilizers, and round-robin fairness as cyclic actions, verified in Python.",
+    "description": "Operating-system synchronization modelled using permutation groups, with scheduling in S_n, mutual exclusion as stabilizers, and round-robin fairness as cyclic actions, verified computationally in Python.",
     "language": "Python",
+    "languages": [
+      "Python"
+    ],
+    "status": "Research",
+    "focus": "Operating Systems / Abstract Algebra / Mathematical Modelling",
     "url": "https://github.com/04pranab/os-symmetry-synchronization",
     "rank": 3
   },
@@ -28,14 +44,24 @@
     "name": "network-queue-control",
     "description": "A variational approach to network queue control showing that constant-rate packet injection minimizes delay and queue growth under convex cost models, linking calculus of variations with OS networking.",
     "language": "Python",
+    "languages": [
+      "Python"
+    ],
+    "status": "Research",
+    "focus": "Networking / Mathematical Optimisation",
     "url": "https://github.com/04pranab/network-queue-control",
     "rank": 4
   },
   {
     "id": 5,
     "name": "energy-optimal-cpu-scheduler",
-    "description": "An educational exploration of energy-aware CPU scheduling, studying how execution timing can minimize power for fixed workloads and illustrating DVFS and performance-power trade-offs in modern processors.",
+    "description": "An educational exploration of energy-aware CPU scheduling, studying how execution timing can minimise power for fixed workloads and illustrating DVFS and performance-power trade-offs in modern processors.",
     "language": "Python",
+    "languages": [
+      "Python"
+    ],
+    "status": "Research",
+    "focus": "Operating Systems / CPU Scheduling / Energy Efficiency",
     "url": "https://github.com/04pranab/energy-optimal-cpu-scheduler",
     "rank": 5
   }

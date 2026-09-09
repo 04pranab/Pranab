@@ -2,13 +2,13 @@
   {
     "id": 1,
     "title": "LowBit: RISC-V-First Platform for Branch-Prediction and Cache-Behavior Characterization",
-    "note": "A RISC-V-first benchmark ecosystem for branch-prediction and cache-behavior characterization. It turns a 50 × 50 taxonomy of branch and cache patterns into 500 small, deterministic C programs.",
+    "note": "A RISC-V-first benchmark ecosystem for branch-prediction and cache-behavior characterization. The planned taxonomy combines controlled branch and cache patterns into 500 small, deterministic C programs, providing a reproducible basis for architectural characterization.",
     "status": "In Prep"
   },
   {
     "id": 2,
-    "title": "OS Synchronization as Symmetry Restrictions in Sn",
-    "note": "Formalization of synchronization as symmetry restrictions in Sn is complete, along with defining and refining a metric on the space for geometric analysis. Pending work includes interpreting the metric structure and tuning model hyperparameters.",
-    "status": "In Hault"
+    "title": "OS Synchronization as Symmetry Restrictions in S_n",
+    "note": "Formalization of synchronization as symmetry restrictions in S_n is complete, along with defining and refining a metric on the space for geometric analysis. Pending work includes interpreting the metric structure and tuning model hyperparameters.",
+    "status": "In Halt"
   }
 ]

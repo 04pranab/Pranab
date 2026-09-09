@@ -117,9 +117,12 @@
                 lB
               </a></li>
 
-            <li><a href="mailto:ompranabmohanty@gmail.com">
-                @
-              </a></li>
+            <li><a href="mailto:ompranabmohanty@gmail.com" data-copy="ompranabmohanty@gmail.com" class="copy-link">
+              <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white"
+                stroke-width=".5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
           </ul>
           </ul>
 
@@ -190,7 +193,17 @@
           <h2 class="view-head"><span class="line-solid">Recent</span><span class="line-ghost">projects.</span></h2>
           <p class="view-sub">Small, deterministic systems built to understand one mechanism at a time — from raw packet
             ingress to synchronization modeled as group actions.</p>
+
+          <!-- SEARCH & FILTER -->
+          <div class="filter-bar">
+            <input type="text" id="project-search" class="filter-input"
+              placeholder="Search projects by name or description..." aria-label="Search projects">
+            <div class="filter-tags" id="filter-tags"></div>
+            <button class="filter-reset" id="filter-reset" style="display:none;">Clear all</button>
+          </div>
+
           <div id="projects-list" class="row-list"></div>
+          <p id="projects-empty" class="empty-state" style="display:none;">No projects match your search.</p>
         </section>
 
         <!-- WORK / EXPERIENCE / RESEARCH -->
@@ -215,23 +228,90 @@
           <div id="tools-grid" class="tools-grid"></div>
         </section>
 
+
         <!-- BLOG LIST -->
         <section class="view" id="view-blog" data-view="blog" hidden>
-          <h2 class="view-head"><span class="line-solid">Thoughts &amp;</span><span class="line-ghost">writing.</span></h2>
-          <p class="view-sub">Short write-ups from whatever I'm building or proving at the time.</p>
+          <h2 class="view-head">
+            <span class="line-solid">Thoughts &amp;</span>
+            <span class="line-ghost">writing.</span>
+          </h2>
+
+          <p class="view-sub">
+            Short write-ups from whatever I'm building or proving at the time.
+          </p>
+
+          <div class="filter-bar">
+            <input type="text" id="blog-search" class="filter-input"
+              placeholder="Search thoughts by title, description or tag..." aria-label="Search blog posts">
+
+            <div class="filter-tags" id="blog-filter-tags"></div>
+
+            <button class="filter-reset" id="blog-filter-reset" style="display:none;">
+              Clear all
+            </button>
+          </div>
+
           <div id="blog-list" class="blog-rows"></div>
+
+          <div id="blog-empty" class="empty-state" style="display:none;">
+            No thoughts found.
+          </div>
         </section>
+
 
         <!-- BLOG POST DETAIL -->
         <section class="view" id="view-blogpost" data-view="blogpost" hidden>
           <button class="link-more blog-back" data-goto="blog"><span>&larr;</span> all writing</button>
+          <div class="reading-progress" id="reading-progress"></div>
           <div class="blog-post-meta">
             <span id="blogpost-date"></span>
             <span class="blog-post-dot">&middot;</span>
             <span id="blogpost-readtime"></span>
           </div>
+          <div class="share-buttons">
+            <!-- Twitter / X Button -->
+            <button class="share-btn" id="share-twitter" title="Share on Twitter" aria-label="Share on Twitter">
+              <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white"
+                stroke-width=".5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+              </svg>
+            </button>
+
+            <!-- LinkedIn Button -->
+            <button class="share-btn" id="share-linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+              <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white"
+                stroke-width=".5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </button>
+
+            <!-- Email Button -->
+            <button class="share-btn" id="share-email" title="Share via email" aria-label="Share via email">
+              <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white"
+                stroke-width=".5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+            </button>
+
+            <!-- Copy Link Button -->
+            <button class="share-btn" id="share-copy" title="Copy link" aria-label="Copy post link">
+              <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white"
+                stroke-width=".5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+
+
           <h2 class="blog-post-title" id="blogpost-title"></h2>
+          <div class="blog-toc-container" id="blog-toc-container"></div>
           <div class="blog-post-body" id="blogpost-body"></div>
+          <div id="related-posts-container"></div>
         </section>
 
         <!-- CONTACT -->
@@ -241,16 +321,19 @@
             design, or where group theory sneaks into computing.</p>
 
           <ul class="contact-rows">
-            <li><a href="mailto:ompranabmohanty@gmail.com"><span>email</span><b>ompranabmohanty@gmail.com</b><span
-                  class="arrow">&#8599;</span></a></li>
-            <li><a href="https://github.com/04pranab" target="_blank"
-                rel="noopener"><span>github</span><b>github.com/04pranab</b><span class="arrow">&#8599;</span></a></li>
-            <li><a href="https://www.linkedin.com/in/om-pranab-mohanty/" target="_blank"
-                rel="noopener"><span>linkedin</span><b>linkedin.com/in/om-pranab-mohanty</b><span
-                  class="arrow">&#8599;</span></a></li>
-            <li><a href="https://04pranab.github.io/UnSent/" target="_blank"
-                rel="noopener"><span>writing</span><b>UnSent — occasional essays</b><span
-                  class="arrow">&#8599;</span></a></li>
+            <li><a href="mailto:ompranabmohanty@gmail.com" data-copy="ompranabmohanty@gmail.com"
+                class="copy-link"><span>email</span><b>ompranabmohanty@gmail.com</b><span
+                  class="arrow">&#8599;</span><span class="copy-icon">&#11194;</span></a></li>
+            <li><a href="https://github.com/04pranab" target="_blank" rel="noopener" data-copy="github.com/04pranab"
+                class="copy-link"><span>github</span><b>github.com/04pranab</b><span class="arrow">&#8599;</span><span
+                  class="copy-icon">&#11194;</span></a></li>
+            <li><a href="https://www.linkedin.com/in/om-pranab-mohanty/" target="_blank" rel="noopener"
+                data-copy="linkedin.com/in/om-pranab-mohanty"
+                class="copy-link"><span>linkedin</span><b>linkedin.com/in/om-pranab-mohanty</b><span
+                  class="arrow">&#8599;</span><span class="copy-icon">&#11194;</span></a></li>
+            <li><a href="https://04pranab.github.io/UnSent/" target="_blank" rel="noopener"
+                data-copy="04pranab.github.io/UnSent" class="copy-link"><span>writing</span><b>UnSent — occasional
+                  essays</b><span class="arrow">&#8599;</span><span class="copy-icon">&#11194;</span></a></li>
           </ul>
 
           <!--
@@ -288,6 +371,16 @@
       <span>&copy; 2026 Om Pranab Mohanty</span>
       <span class="footer-note">Paropakaram Idam Sariram</span>
     </footer>
+
+    <!-- BACK TO TOP -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 3v12m0 0l-4-4m4 4l4-4" />
+      </svg>
+    </button>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="toast-container"></div>
 
   </div>
 
