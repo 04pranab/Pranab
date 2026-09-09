@@ -7,8 +7,13 @@
   },
   {
     "id": 2,
+<<<<<<< HEAD
     "title": "OS Synchronization as Symmetry Restrictions in S_n",
     "note": "Formalization of synchronization as symmetry restrictions in S_n is complete, along with defining and refining a metric on the space for geometric analysis. Pending work includes interpreting the metric structure and tuning model hyperparameters.",
+=======
+    "title": "OS Synchronization as Symmetry Restrictions in Sn",
+    "note": "Formalization of synchronization as symmetry restrictions in Sn is complete, along with defining and refining a metric on the space for geometric analysis. Pending work includes interpreting the metric structure and tuning model hyperparameters.",
+>>>>>>> 053e91127807467a69f377a6561f8e85bdfd52a6
     "status": "In Halt"
   }
 ]
