@@ -1,387 +1,1070 @@
 [
-    {
-        "slug": "risc-v-as-a-research-platform",
-        "date": "2026-08-30",
-        "readTime": "8 min read",
-        "title": "RISC-V as a Research Platform",
-        "excerpt": "Why an open instruction set becomes much more interesting when the goal is not just to run programs, but to make architectural behaviour measurable, reproducible, and experimentally useful.",
-        "body": [
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Why RISC-V Is Interesting"
-            },
-            {
-                "type": "paragraph",
-                "text": "RISC-V is interesting to me for a reason that goes beyond the instruction set itself. Its open ISA makes it a useful platform for asking questions about computer architecture, operating systems, compilers, and performance without treating the processor as a completely opaque object."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "From Programs to Machine Behaviour"
-            },
-            {
-                "type": "paragraph",
-                "text": "When working close to the machine, a small C or assembly program becomes an experiment. Instructions are fetched, decoded, executed, and reflected in architectural state. Following that path forces connections between abstractions that are often taught separately."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Controlled Workloads"
-            },
-            {
-                "type": "paragraph",
-                "text": "This is one reason I have been exploring RISC-V alongside operating systems and computer architecture. Writing small programs is one layer. Running them on a RISC-V environment is another. Studying their behaviour through simulation and traces adds another layer where architectural questions become measurable."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "RISC-V as a Laboratory"
-            },
-            {
-                "type": "paragraph",
-                "text": "The interesting part is the boundary between software and the machine. A workload has a structure: branches, memory accesses, arithmetic operations, dependencies, and instruction mixes. A processor responds to that structure through pipelines, caches, prediction, queues, and execution resources."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "The Larger Lesson"
-            },
-            {
-                "type": "paragraph",
-                "text": "That perspective is central to my LowBIt work. I am interested in small, deterministic programs that can act as controlled experiments rather than opaque benchmark binaries. If the workload is reproducible, architectural measurements can be compared more carefully across configurations."
-            }
-        ],
-        "tags": [
-            "RISC-V",
-            "Computer Architecture",
-            "Systems",
-            "Benchmarking"
+  {
+    "slug": "risc-v-as-a-research-platform",
+    "date": "2026-08-30",
+    "readTime": "14 min read",
+    "title": "RISC-V as a Research Platform",
+    "excerpt": "Why an open instruction set becomes much more interesting when the goal is not merely to run programs, but to make architectural behaviour measurable, reproducible, and experimentally useful.",
+    "body": [
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Difference Between Using a Processor and Studying One"
+      },
+      {
+        "type": "paragraph",
+        "text": "Most programmers encounter a processor through an abstraction: compile a program, run it, and trust the machine to execute the resulting binary. That abstraction is enormously useful, but it hides the very mechanisms that become interesting when the question changes from “Does the program work?” to “Why did the machine behave this way?” Computer architecture research lives in that second question. It asks how instruction sets, microarchitectures, memory systems, compilers, operating systems, and workloads interact. RISC-V is particularly valuable in this setting because the ISA is an open standard with publicly available specifications, and because its design separates a relatively small base ISA from optional extensions. The result is not simply another CPU instruction set. It is a comparatively accessible interface at which software and hardware research can meet.",
+        "cite": [
+          3
         ]
-    },
-    {
-        "slug": "what-gem5-teaches-about-computer-architecture",
-        "date": "2026-08-24",
-        "readTime": "9 min read",
-        "title": "What gem5 Actually Teaches About Computer Architecture",
-        "excerpt": "Simulation makes processor behaviour visible, but looking closely at CPU models, memory systems, and execution reveals why architectural experiments need careful experimental design.",
-        "body": [
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "From Diagrams to Experiments"
-            },
-            {
-                "type": "paragraph",
-                "text": "A computer architecture diagram can make a processor look wonderfully tidy. Fetch, decode, execute, memory, and writeback fit into a few boxes. A detailed simulator quickly removes that simplicity."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Out-of-Order Execution"
-            },
-            {
-                "type": "paragraph",
-                "text": "Working with gem5 has been one way for me to move from architecture diagrams toward experiments. Instead of only asking how a processor should behave, I can ask what happens when a particular workload is executed under a particular CPU and memory configuration."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Experimental Validity"
-            },
-            {
-                "type": "paragraph",
-                "text": "This becomes especially interesting with out-of-order execution. Instructions do not necessarily complete in the same order in which the program presents them. Dependencies, speculation, queues, execution resources, and memory behaviour all influence forward progress."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Debugging as an Architecture Lesson"
-            },
-            {
-                "type": "paragraph",
-                "text": "The simulator also teaches an important distinction between architectural correctness and experimental usefulness. A configuration can be technically valid while still being a poor instrument for the question being asked. The CPU model, workload, cache configuration, simulation mode, and measurement method all matter."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "gem5 as an Experimental Instrument"
-            },
-            {
-                "type": "paragraph",
-                "text": "Debugging a simulation can therefore become an architecture lesson. A stalled instruction stream, an unexpected memory access, or a run that fails to make forward progress can reveal interactions between the workload, the simulated machine, and the simulator configuration."
-            }
-        ],
-        "tags": [
-            "gem5",
-            "Computer Architecture",
-            "Simulation",
-            "RISC-V"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "What an ISA Actually Gives a Researcher"
+      },
+      {
+        "type": "paragraph",
+        "text": "An instruction set architecture is the contract visible to software. It defines instructions, registers, memory-access rules, privilege mechanisms, and other architectural behaviour that an implementation must expose. The important research property is that the contract is distinct from the microarchitecture. Two processors can implement the same ISA while using very different pipelines, cache hierarchies, predictors, issue mechanisms, or execution units. RISC-V explicitly embraces this separation. Its documentation describes an ISA intended to be implementable across different microarchitectural styles, including in-order and out-of-order designs. That makes the ISA a stable experimental boundary: a workload can remain conceptually constant while the underlying implementation changes.",
+        "cite": [
+          3
         ]
-    },
-    {
-        "slug": "learning-through-derivatives",
-        "date": "2026-08-20",
-        "readTime": "6 min read",
-        "title": "Learning Through Derivatives",
-        "excerpt": "A mathematical view of neural-network learning, where derivatives turn parameter changes into a measurable path from error to update.",
-        "body": [
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "The Derivative Behind Learning"
-            },
-            {
-                "type": "paragraph",
-                "text": "The phrase 'the neural network learns' can make learning sound almost magical. Underneath the terminology is a repeated numerical process: measure an error, determine how the error changes with respect to the parameters, and update those parameters."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Seeing Gradient Descent"
-            },
-            {
-                "type": "paragraph",
-                "text": "The derivative is the key piece. If changing a parameter slightly increases the loss, the gradient indicates that the parameter should move in the opposite direction. The update is therefore guided by local information about the loss function."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Backpropagation Through Layers"
-            },
-            {
-                "type": "paragraph",
-                "text": "I find this easier to understand visually than through equations alone. Plotting the loss as a function of a parameter turns gradient descent into movement across a mathematical landscape. The network is not searching randomly for an answer. It is following information encoded in the gradient."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Building Intuition with Small Networks"
-            },
-            {
-                "type": "paragraph",
-                "text": "Backpropagation extends this idea through multiple layers. The chain rule lets us determine how a change in one parameter affects the final loss through all the intermediate operations between that parameter and the output."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "A General Mathematical View"
-            },
-            {
-                "type": "paragraph",
-                "text": "Building small neural networks makes the distinction between forward propagation and learning much clearer. Forward propagation produces a prediction. Backpropagation computes how the parameters contributed to the error. The optimizer then uses that information to change the parameters."
-            }
-        ],
-        "tags": [
-            "Machine Learning",
-            "Mathematics",
-            "Deep Learning",
-            "Optimization"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Modularity Changes the Research Question"
+      },
+      {
+        "type": "paragraph",
+        "text": "RISC-V is built around a base integer ISA plus extensions. This modularity matters because architectural research frequently studies trade-offs rather than a single “best” processor. An implementation can support integer computation, atomics, floating point, vectors, bit manipulation, cryptography, or other capabilities according to its target. Profiles provide another layer of structure by defining more constrained combinations of ISA features. For a researcher, this creates several natural questions: What workload benefits from an extension? What is the performance cost of supporting it? How does a compiler exploit it? What happens to code size? Does the extension change memory behaviour or instruction mix? The ISA becomes a controlled variable rather than a fixed background assumption.",
+        "cite": [
+          1
         ]
-    },
-    {
-        "slug": "when-direction-matters-more-than-magnitude",
-        "date": "2026-08-16",
-        "readTime": "8 min read",
-        "title": "When Direction Matters More Than Magnitude",
-        "excerpt": "An experiment with magnitude-direction representations that asks whether separating a vector's scale from its geometry can reveal structure hidden by ordinary representations.",
-        "body": [
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Separating Magnitude and Direction"
-            },
-            {
-                "type": "paragraph",
-                "text": "Most machine-learning pipelines treat a feature vector as one object. But a non-zero vector contains at least two distinct pieces of information: its magnitude and its direction."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "What MNIST Revealed"
-            },
-            {
-                "type": "paragraph",
-                "text": "For a non-zero vector x, we can write x = r u, where r = ||x|| is the magnitude and u = x / ||x|| is the normalized direction. This simple decomposition creates an interesting question: what happens if a model is asked to learn from these components separately?"
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Beyond Concatenation"
-            },
-            {
-                "type": "paragraph",
-                "text": "In my MNIST experiments, magnitude alone was weak for the classification task, while direction carried substantially more information. Combining magnitude and direction provided additional information, but the result also suggested that the interaction between the two components deserved closer study."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Geometry and Dimensionality Reduction"
-            },
-            {
-                "type": "paragraph",
-                "text": "That led to a broader question. Perhaps the important issue is not simply whether magnitude and direction are useful, but whether magnitude should influence how directional information is represented. Instead of merely concatenating the two, one can explore magnitude-conditioned transformations of the directional representation."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "The Broader Question"
-            },
-            {
-                "type": "paragraph",
-                "text": "This line of experimentation became part of my exploration of spherical representations and the Spherical Representation Transformation Neuron framework. The useful question is not whether a single representation wins on one dataset. It is whether there are classes of data for which the geometry of a representation provides a better inductive structure."
-            }
-        ],
-        "tags": [
-            "Machine Learning",
-            "Representation Learning",
-            "PCA",
-            "SRTN",
-            "Mathematics"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "From Source Code to Architectural Behaviour"
+      },
+      {
+        "type": "paragraph",
+        "text": "A small C program can be treated as an experiment. Consider a loop that repeatedly performs integer arithmetic. At the source level, it looks almost trivial. After compilation, however, it becomes a sequence of loads, arithmetic instructions, branches, address calculations, and loop-control operations. On a real processor, those instructions encounter a pipeline, queues, registers, predictors, caches, and memory. A simulator or hardware trace can expose parts of that journey. This is where architecture becomes experimentally interesting: the program is no longer just an application, but a controlled stimulus applied to a machine.",
+        "cite": [
+          3
         ]
-    },
-    {
-        "slug": "building-a-lowbit-trace-corpus",
-        "date": "2026-08-10",
-        "readTime": "9 min read",
-        "title": "Building a LowBIt Trace Corpus",
-        "excerpt": "A research direction connecting deterministic programs, execution traces, RISC-V, and computer architecture to build a reusable foundation for workload and performance analysis.",
-        "body": [
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Why Build a Trace Corpus"
-            },
-            {
-                "type": "paragraph",
-                "text": "Benchmarks are useful because they turn vague claims about performance into measurable experiments. But a benchmark is only as interesting as the questions it allows us to ask."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Controlled Workloads"
-            },
-            {
-                "type": "paragraph",
-                "text": "My current LowBIt direction is to build a trace corpus around carefully designed workloads and low-bit computation. The goal is not simply to collect execution logs, but to create a structured dataset connecting programs with measurable execution and architectural behaviour."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "The LowBIt Benchmark Direction"
-            },
-            {
-                "type": "paragraph",
-                "text": "The basic idea is to run a diverse collection of small programs, collect relevant execution information, and organize the resulting traces so that they can be reused for analysis and benchmarking. A large collection of controlled workloads can expose patterns that a handful of hand-picked examples cannot."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "A RISC-V-First Extension"
-            },
-            {
-                "type": "paragraph",
-                "text": "The benchmark side of LowBIt focuses on lightweight and deterministic workloads. The current ecosystem includes LB-ML-001, a transformer scaled dot-product attention kernel designed around reproducible workloads and reference validation."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "What Makes a Corpus Useful"
-            },
-            {
-                "type": "paragraph",
-                "text": "A broader RISC-V-first research direction extends this idea toward branch-prediction and cache-behaviour characterization. The intended taxonomy uses combinations of controlled branch and cache patterns to produce many small deterministic C programs."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Research Infrastructure"
-            },
-            {
-                "type": "paragraph",
-                "text": "The value of the corpus is therefore not just its size. Its usefulness depends on reproducibility, metadata, clear workload definitions, consistent metrics, and a generation pipeline that makes experiments repeatable."
-            }
-        ],
-        "tags": [
-            "LowBIt",
-            "RISC-V",
-            "Computer Architecture",
-            "Benchmarking",
-            "Performance"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why Small Workloads Can Be More Scientific Than Large Ones"
+      },
+      {
+        "type": "paragraph",
+        "text": "Large benchmark suites are valuable because real applications contain realistic mixtures of computation and memory behaviour. Yet realism can make causality difficult to establish. If a benchmark becomes 8 percent faster, which architectural feature caused the improvement? A small deterministic workload can sometimes answer that question more cleanly. A program deliberately designed to stress a branch predictor, a cache, integer multiplication, dependency chains, or memory latency can isolate a narrower phenomenon. Such programs do not replace large benchmarks. They complement them by acting as controlled experiments.",
+        "cite": [
+          2
         ]
-    },
-    {
-        "slug": "operating-systems-through-symmetry",
-        "date": "2026-09-01",
-        "readTime": "8 min read",
-        "title": "Looking at Operating-System Synchronization Through Symmetry",
-        "excerpt": "An attempt to describe synchronization and scheduling using permutation groups, turning familiar operating-system mechanisms into questions about symmetry and restrictions.",
-        "body": [
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "A Different View of Synchronization"
-            },
-            {
-                "type": "paragraph",
-                "text": "Operating-system synchronization is usually introduced through locks, semaphores, monitors, critical sections, and scheduling policies. I became interested in a different description: what if some of these behaviours could be understood through symmetry?"
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Processes and Permutations"
-            },
-            {
-                "type": "paragraph",
-                "text": "A collection of processes can be viewed as objects that may be permuted. The symmetric group S_n provides a natural mathematical language for describing these permutations and the restrictions imposed by synchronization."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Synchronization as Restriction"
-            },
-            {
-                "type": "paragraph",
-                "text": "From this perspective, a synchronization rule can be interpreted as restricting which transformations of the process configuration are allowed. Mutual exclusion, for example, can be related to stabilizing a configuration in which a critical resource cannot be simultaneously occupied by multiple processes."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Scheduling as Transformation"
-            },
-            {
-                "type": "paragraph",
-                "text": "Scheduling adds another layer. A schedule is not merely a list of processes. It is a transformation of which process is allowed to make progress at each point. Cyclic actions provide a natural mathematical picture for round-robin-style behaviour."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Why the Algebra Matters"
-            },
-            {
-                "type": "paragraph",
-                "text": "The interesting part is not replacing operating-system terminology with abstract algebra for its own sake. The goal is to ask whether the algebra exposes structure that is difficult to see in the usual implementation-level description."
-            },
-            {
-                "type": "heading",
-                "level": 2,
-                "text": "Toward a Mathematical Model"
-            },
-            {
-                "type": "paragraph",
-                "text": "My work on this direction includes formalization in S_n and the definition and refinement of a metric structure intended for geometric analysis. The remaining questions concern how to interpret the resulting metric structure and how the computational model should be tuned."
-            },
-            {
-                "type": "paragraph",
-                "text": "This project sits at an intersection I particularly enjoy: operating systems on one side, abstract algebra and mathematical structure on the other. The computer system becomes a place where an abstract mathematical object can acquire operational meaning."
-            }
-        ],
-        "tags": [
-            "Operating Systems",
-            "Abstract Algebra",
-            "Group Theory",
-            "Mathematical Modelling",
-            "Scheduling"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Reproducibility Is Part of the Architecture Experiment"
+      },
+      {
+        "type": "paragraph",
+        "text": "A useful architectural result is more than a number. It needs enough information for another researcher to understand how that number was produced. The workload, compiler, compiler flags, binary, ISA configuration, CPU model, cache configuration, memory system, simulator version, warm-up policy, measurement interval, and statistical treatment can all influence the observation. This is especially important when simulation is involved. A trace generated under one configuration is not simply “the behaviour of the program”; it is behaviour produced by a particular program-machine pair under a particular experimental setup.",
+        "cite": [
+          1
         ]
-    }
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "RISC-V and the Software Stack"
+      },
+      {
+        "type": "paragraph",
+        "text": "The research value of RISC-V extends upward as well as downward. Its privileged architecture defines mechanisms relevant to operating systems, including privilege levels, traps, memory management, and system control. This means a researcher can move from an instruction-level question toward OS behaviour without crossing into an entirely closed ecosystem. The same platform can therefore support questions about compilers, runtimes, kernels, virtual memory, interrupts, synchronization, and microarchitecture.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "RISC-V as a Laboratory"
+      },
+      {
+        "type": "paragraph",
+        "text": "The phrase “research platform” is useful only if it describes a method, not a slogan. For me, the method is to construct workloads whose behaviour can be described before they are run, execute them under controlled configurations, collect traces and metrics, and then connect those observations back to architectural mechanisms. RISC-V makes this workflow attractive because the ISA specification is accessible, extensible, and designed to support implementations ranging from educational systems to industrial processors.",
+        "cite": [
+          3
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Where This Leads"
+      },
+      {
+        "type": "paragraph",
+        "text": "This perspective naturally leads toward benchmark and trace infrastructure. Instead of treating a benchmark as a single executable that produces a single score, a research corpus can represent a workload as a structured object: source program, compiler configuration, binary, ISA, execution parameters, trace, and derived metrics. Such a corpus can support comparisons across processors and simulators while preserving the provenance of each measurement. That is the direction behind my LowBIt work: make architectural behaviour something that can be collected, described, reproduced, and studied rather than merely observed once.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Larger Lesson"
+      },
+      {
+        "type": "paragraph",
+        "text": "RISC-V is interesting not because openness automatically produces better research, but because openness lowers the distance between the researcher and the machine contract. When the ISA, extensions, privileged architecture, toolchains, simulators, and workloads can all become objects of inspection, the computer stops being a black box. It becomes an experimental system. The real opportunity is therefore methodological: use the openness of the platform to ask sharper questions, design more controlled experiments, and build results that other researchers can reproduce and extend.",
+        "cite": [
+          2
+        ]
+      }
+    ],
+    "tags": [
+      "RISC-V",
+      "Computer Architecture",
+      "Systems",
+      "Benchmarking",
+      "Research Methods"
+    ],
+    "sources": [
+      {
+        "title": "RISC-V Ratified Specifications",
+        "url": "https://riscv.org/specifications/ratified/",
+        "publisher": "RISC-V International",
+        "type": "Specification",
+        "citedIn": 3
+      },
+      {
+        "title": "RISC-V Documentation",
+        "url": "https://docs.riscv.org/",
+        "publisher": "RISC-V International",
+        "type": "Documentation",
+        "citedIn": 3
+      },
+      {
+        "title": "RISC-V ISA: Introduction",
+        "url": "https://docs.riscv.org/reference/isa/v20240411/unpriv/intro.html",
+        "publisher": "RISC-V International",
+        "type": "ISA reference",
+        "citedIn": 4
+      }
+    ]
+  },
+  {
+    "slug": "what-gem5-teaches-about-computer-architecture",
+    "date": "2026-08-24",
+    "readTime": "15 min read",
+    "title": "What gem5 Actually Teaches About Computer Architecture",
+    "excerpt": "Simulation makes processor behaviour visible, but looking closely at CPU models, memory systems, execution, and experimental validity reveals why architecture is as much about methodology as it is about mechanisms.",
+    "body": [
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "From Architecture Diagrams to Experiments"
+      },
+      {
+        "type": "paragraph",
+        "text": "Architecture courses often present processors as neat diagrams: fetch, decode, execute, memory, writeback. The diagram is useful because it gives the mind a map. A detailed simulator teaches something different. It shows that the boxes are not the machine; they are a compressed description of a large collection of queues, state machines, dependencies, timing relationships, arbitration decisions, and memory interactions. Working with gem5 has therefore been less about learning a simulator and more about learning what it means to turn an architectural idea into an experiment.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "What gem5 Is Really Modeling"
+      },
+      {
+        "type": "paragraph",
+        "text": "gem5 is a modular computer-system simulator used for research and education. Its value comes from allowing researchers to configure and inspect components of a simulated system rather than treating the processor as one indivisible object. CPU models, caches, memory systems, buses, interconnects, ISA targets, and execution modes can participate in an experiment. This flexibility is also a warning: a simulation result is never simply “what gem5 says.” It is the result of a particular configuration of a particular simulator running a particular workload.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Out-of-Order Execution Is Where the Diagram Starts Fighting Back"
+      },
+      {
+        "type": "paragraph",
+        "text": "Out-of-order execution is an excellent example. A program presents instructions in an architectural order, but a modern out-of-order processor attempts to execute independent work as soon as the necessary resources and operands are available. Dependencies constrain what can move. Functional-unit availability constrains what can execute. Queues and buffers constrain how much work can remain in flight. Branch prediction introduces speculation. The memory hierarchy can delay instructions whose operands depend on cache misses. The final committed result still has to respect architectural correctness, but the path to that result can be highly dynamic.",
+        "cite": [
+          3
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why a Correct CPU Model Can Still Be the Wrong Instrument"
+      },
+      {
+        "type": "paragraph",
+        "text": "One of the most important lessons from simulation is that correctness and usefulness are different properties. A configuration can be valid according to the simulator and still be poorly matched to a research question. If the question concerns branch prediction, the predictor and workload must expose meaningful branch behaviour. If the question concerns cache locality, the memory hierarchy must be specified carefully. If the question concerns instruction scheduling, the CPU model needs enough microarchitectural detail to make scheduling effects observable. The simulator is an instrument, and every instrument has a measurement envelope.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "SE and FS Are Different Experimental Worlds"
+      },
+      {
+        "type": "paragraph",
+        "text": "Simulation mode also changes what is being studied. In a system-emulation style experiment, a user-level program can be executed without modeling an entire booting operating system. Full-system simulation instead models a complete machine environment, including an operating system and its interactions with hardware. Neither mode is universally better. SE can make controlled application-level experiments easier and cheaper to run. FS becomes important when the research question depends on kernel behaviour, device interaction, interrupts, system calls, or a complete software stack. Choosing between them is part of experiment design.",
+        "cite": [
+          3
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why RISC-V Makes the Workflow Interesting"
+      },
+      {
+        "type": "paragraph",
+        "text": "RISC-V provides a natural target for this kind of work because the ISA is open and its specifications are publicly available. A researcher can move between source code, compiled instructions, ISA semantics, simulator configuration, and architectural measurements without relying entirely on undocumented processor behaviour. That does not make simulation automatically realistic. It does make the experimental boundary easier to inspect.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "When a Simulation Appears to Hang"
+      },
+      {
+        "type": "paragraph",
+        "text": "A stalled simulation is also a lesson. A run that consumes substantial host CPU time without apparently making progress can arise from many different causes: a workload that is unexpectedly long, a configuration that creates an enormous simulated event stream, a problematic interaction between a CPU model and execution mode, an incorrect workload assumption, or a genuine simulator issue. The right response is not immediately to conclude that the simulated processor is broken. The first task is to determine which layer has stopped behaving as expected.",
+        "cite": [
+          3
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "A Debugging Hierarchy for Architectural Experiments"
+      },
+      {
+        "type": "paragraph",
+        "text": "A useful debugging sequence is to shrink the experiment. Start with a tiny deterministic binary. Verify that it runs. Inspect the ISA and execution mode. Use the simplest CPU model that answers the question. Add memory hierarchy complexity only after the baseline works. Then increase workload size. Finally, compare the behaviour against an independent expectation. This approach resembles scientific control experiments: establish a known baseline before adding variables.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Metrics Are Not Self-Interpreting"
+      },
+      {
+        "type": "paragraph",
+        "text": "Simulation produces many numbers: cycles, instructions, cache accesses, misses, branch predictions, queue occupancy, execution-unit activity, and derived performance measures. The existence of a metric does not make it meaningful. A cache miss count needs a defined cache level and access population. IPC needs a clear instruction definition and measurement interval. Warm-up behaviour can change the observed steady state. A researcher therefore has to define metrics before interpreting them.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Simulator Is Part of the Method"
+      },
+      {
+        "type": "paragraph",
+        "text": "The deeper lesson is that gem5 is not merely a machine that produces performance numbers. It is a framework for constructing hypotheses about machines. The quality of an experiment depends on the relationship between the research question, the workload, the simulated architecture, and the measurements. A sophisticated CPU model cannot rescue a badly controlled workload, just as a beautiful benchmark cannot compensate for an unclear measurement definition.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "From Individual Runs to Research Infrastructure"
+      },
+      {
+        "type": "paragraph",
+        "text": "This is why I see simulation and trace collection as connected problems. A single experiment answers a narrow question. A structured corpus can answer families of questions. If each workload has reproducible metadata and each run records the architectural configuration and derived measurements, the corpus becomes a research instrument in its own right. It can be used to study sensitivity, compare configurations, train models, validate heuristics, and discover workload classes.",
+        "cite": [
+          3
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Practical Lesson"
+      },
+      {
+        "type": "paragraph",
+        "text": "The most useful thing gem5 has taught me is not a particular command or CPU model. It is the discipline of asking exactly what a simulation represents. A processor model is an abstraction. A trace is an observation. A benchmark is a workload definition. A performance number is a measurement under conditions. Keeping those distinctions clear is what turns a simulator from a complicated piece of software into a scientific instrument.",
+        "cite": [
+          1
+        ]
+      }
+    ],
+    "tags": [
+      "gem5",
+      "Computer Architecture",
+      "Simulation",
+      "RISC-V",
+      "Experimental Design"
+    ],
+    "sources": [
+      {
+        "title": "gem5",
+        "url": "https://www.gem5.org/",
+        "publisher": "gem5 Project",
+        "type": "Project",
+        "citedIn": 3
+      },
+      {
+        "title": "gem5 Documentation",
+        "url": "https://www.gem5.org/documentation/",
+        "publisher": "gem5 Project",
+        "type": "Documentation",
+        "citedIn": 5
+      },
+      {
+        "title": "CPU Models",
+        "url": "https://www.gem5.org/documentation/general_docs/cpu_models/",
+        "publisher": "gem5 Project",
+        "type": "Technical reference",
+        "citedIn": 4
+      }
+    ]
+  },
+  {
+    "slug": "learning-through-derivatives",
+    "date": "2026-08-20",
+    "readTime": "13 min read",
+    "title": "Learning Through Derivatives",
+    "excerpt": "A mathematical tour from loss functions and derivatives to gradient descent and backpropagation, with the emphasis on building intuition rather than treating optimization as a black box.",
+    "body": [
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Derivative Behind the Word “Learning”"
+      },
+      {
+        "type": "paragraph",
+        "text": "The phrase “a neural network learns” can make learning sound like a mysterious property that appears once enough data and layers are assembled. Mathematically, the core mechanism is much less mysterious. A model produces an output, a loss function measures how far that output is from the desired result, and derivatives describe how the loss changes when the model parameters change. An optimizer uses that local information to choose parameter updates. What looks like learning at the system level is therefore a repeated numerical process built from calculus.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "A One-Parameter Example"
+      },
+      {
+        "type": "paragraph",
+        "text": "Suppose a model has a single parameter w and a loss L(w). If the derivative dL/dw is positive at the current value, increasing w locally increases the loss. Moving w in the negative direction therefore tends to reduce the loss, at least for a sufficiently small step. Gradient descent expresses that idea as w_new = w - eta times dL/dw, where eta is the learning rate. The equation is short, but it contains the central logic of optimization: use the slope of the objective to decide which direction is locally promising.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why the Learning Rate Matters"
+      },
+      {
+        "type": "paragraph",
+        "text": "The gradient gives direction, not a complete travel plan. A step that is too small can make optimization painfully slow. A step that is too large can overshoot useful regions or destabilize training. This is one reason optimizers introduce additional mechanisms around the basic gradient-descent idea. Momentum, adaptive step-size methods, schedules, normalization strategies, and other techniques modify how gradient information is converted into parameter updates.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "From One Parameter to Thousands or Millions"
+      },
+      {
+        "type": "paragraph",
+        "text": "Real models have many parameters. A scalar derivative becomes a gradient vector, containing the partial derivative of the loss with respect to each parameter. If the parameter vector is theta, gradient descent can be written compactly as theta_new = theta - eta grad L(theta). The geometry becomes useful here. The gradient points in the direction of greatest local increase of the scalar loss, so its negative points toward the direction of greatest local decrease.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Chain Rule Is the Engine of Backpropagation"
+      },
+      {
+        "type": "paragraph",
+        "text": "A multilayer network is a composition of functions. An input passes through an affine transformation, an activation, another transformation, another activation, and eventually a loss. The parameter of an early layer influences the loss indirectly through every operation that follows it. The chain rule provides the mechanism for calculating that dependency. Backpropagation is essentially an efficient organization of repeated chain-rule applications so that intermediate derivatives can be reused rather than recomputed independently.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Forward Pass and Backward Pass"
+      },
+      {
+        "type": "paragraph",
+        "text": "The forward pass evaluates the network. Given x and parameters theta, it produces a prediction y_hat. The loss function then maps the prediction and target y to a scalar L. The backward pass starts from that scalar and propagates derivative information backward through the computational graph. Finally, the optimizer updates the parameters. Keeping these stages separate is one of the simplest ways to understand what training code is actually doing.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why Activation Functions Matter Mathematically"
+      },
+      {
+        "type": "paragraph",
+        "text": "Activation functions introduce nonlinearity, but they also introduce derivatives that participate directly in backpropagation. If an activation has a derivative that becomes extremely small across a region, gradients can shrink as they propagate through many layers. If the derivative behaves differently, optimization dynamics change. Thus architecture is not merely a question of forward computation. The mathematical properties of each operation affect the backward flow of information as well.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Loss Landscapes Are Useful Mental Models"
+      },
+      {
+        "type": "paragraph",
+        "text": "For a model with two parameters, the loss can be visualized as a surface over a two-dimensional parameter plane. Gradient descent then becomes a trajectory across that surface. Real neural networks have vastly more dimensions, so the picture is not literally available to us, but it remains conceptually useful. It emphasizes that training is an optimization process over a complicated objective, and that curvature, flat regions, steep regions, and saddle-like structures can affect optimization.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Automatic Differentiation Does Not Remove the Mathematics"
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern frameworks calculate derivatives automatically, which is one of the great practical achievements of machine learning software. But automatic differentiation does not replace the mathematical concept. It automates the bookkeeping required to apply the chain rule to a computational graph. Understanding the underlying derivative remains important because a framework can compute a gradient perfectly while the researcher is asking the wrong optimization question, using an inappropriate loss, or interpreting a gradient incorrectly.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "A Small Network Is an Excellent Laboratory"
+      },
+      {
+        "type": "paragraph",
+        "text": "One of the best ways to understand learning is to build a tiny network whose parameters can be inspected directly. Track the forward values, compute a loss, perturb one parameter slightly, and compare the observed loss change with the analytical derivative. Then run a few gradient-descent steps and plot the trajectory. This experiment connects the equation to behaviour. The derivative stops being a symbol on paper and becomes a measurable local prediction.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Deeper Lesson"
+      },
+      {
+        "type": "paragraph",
+        "text": "What I find most interesting about derivatives in machine learning is that they provide a bridge between mathematical abstraction and computational behaviour. The network does not “know” which parameter is responsible for an error. The gradient encodes that sensitivity. Backpropagation transports the information efficiently. The optimizer turns it into motion. Learning is therefore not magic hidden inside a library. It is a carefully engineered interaction between functions, derivatives, numerical approximation, and repeated feedback.",
+        "cite": [
+          1
+        ]
+      }
+    ],
+    "tags": [
+      "Machine Learning",
+      "Mathematics",
+      "Deep Learning",
+      "Optimization",
+      "Backpropagation"
+    ],
+    "sources": [
+      {
+        "title": "Deep Learning",
+        "url": "https://www.deeplearningbook.org/",
+        "publisher": "Goodfellow, Bengio & Courville",
+        "type": "Textbook",
+        "citedIn": 6
+      },
+      {
+        "title": "Multilayer Perceptrons",
+        "url": "https://www.deeplearningbook.org/contents/mlp.html",
+        "publisher": "Deep Learning textbook",
+        "type": "Chapter",
+        "citedIn": 5
+      }
+    ]
+  },
+  {
+    "slug": "when-direction-matters-more-than-magnitude",
+    "date": "2026-08-16",
+    "readTime": "14 min read",
+    "title": "When Direction Matters More Than Magnitude",
+    "excerpt": "An investigation of magnitude-direction representations, asking whether separating scale from geometry can expose structure hidden by ordinary feature representations.",
+    "body": [
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "A Vector Contains More Than One Kind of Information"
+      },
+      {
+        "type": "paragraph",
+        "text": "A feature vector is usually treated as a single point in a high-dimensional space. That is mathematically convenient, but a non-zero vector contains at least two conceptually different components: how large it is and which direction it points. Writing x = r u, where r = ||x|| and u = x / ||x||, separates these quantities. The decomposition is elementary. The research question is not. It asks whether magnitude and direction play different semantic roles in a learning problem, and whether a model should therefore treat them differently.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why Normalization Changes the Question"
+      },
+      {
+        "type": "paragraph",
+        "text": "When a vector is normalized, points that lie on the same ray become identical in the directional representation. Information about scale is deliberately discarded. This can be useful when scale is nuisance variation, but harmful when magnitude contains class information. The important point is that normalization is not a neutral preprocessing step. It encodes a hypothesis about what information matters.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The MNIST Experiment"
+      },
+      {
+        "type": "paragraph",
+        "text": "In my MNIST experiments, I used the decomposition to compare models based on magnitude, direction, and combinations of the two. The magnitude-only representation was weak for the classification task, while direction retained substantially more information. A directional representation therefore appeared to preserve much of the class-relevant structure. Combining direction with magnitude improved the representation, but the result raised a more interesting question: should magnitude simply be appended as another feature, or should it influence the directional representation itself?",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Concatenation Is Not the Only Interaction"
+      },
+      {
+        "type": "paragraph",
+        "text": "A common approach to combining two feature sources is concatenation. If z represents directional features and r represents magnitude, the model receives [z, r]. This is a reasonable baseline because it lets a downstream classifier learn relationships between them. But concatenation does not impose any particular structure on the interaction. If the hypothesis is that scale should modulate geometry, a representation that explicitly expresses that relationship may be more informative.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Magnitude-Conditioned Direction"
+      },
+      {
+        "type": "paragraph",
+        "text": "One idea I explored is to transform a directional representation according to magnitude. In a simple form, z' = z elementwise multiplied by g(r), with g(r) = 1 + alpha(r - mu_r). Here alpha controls the strength of the conditioning and mu_r centers the magnitude. The important idea is conceptual rather than the particular formula: magnitude becomes a control variable that changes how directional information is presented to the classifier.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Geometry Behind the Experiment"
+      },
+      {
+        "type": "paragraph",
+        "text": "The decomposition naturally moves the discussion from ordinary Euclidean coordinates toward geometry. Direction lives on a unit sphere, while magnitude describes radial position. A representation can therefore be thought of as separating radial and angular information. This perspective suggests questions about whether classes form separable regions on the sphere, whether principal components preserve meaningful angular structure, and whether classification boundaries differ when radial variation is removed.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "PCA Is More Than a Compression Trick"
+      },
+      {
+        "type": "paragraph",
+        "text": "Principal component analysis is often introduced as dimensionality reduction, but in this setting it can also be used as a probe. If directional vectors are projected into a lower-dimensional space, we can inspect how much variance is retained and whether classes remain structured. In the experiments, PCA provided a practical way to study the directional representation without requiring a classifier to be the only source of evidence.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "A Classifier Score Is Not the Whole Story"
+      },
+      {
+        "type": "paragraph",
+        "text": "A representation experiment can easily become a leaderboard exercise: choose a dataset, report the highest validation accuracy, and declare a winner. That is not enough to establish a useful representation principle. The more interesting questions are whether the behaviour survives different random seeds, dimensionalities, regularization settings, datasets, and model families. A representation that wins once may simply have matched one dataset's quirks.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The SRTN Direction"
+      },
+      {
+        "type": "paragraph",
+        "text": "This line of thinking led toward my exploration of spherical representation transformation neurons. The central motivation is to make the interaction between geometry and scale explicit rather than assuming that a generic classifier will discover the appropriate relationship. The framework is therefore best understood as a research hypothesis: there may be datasets for which radial and angular information should be modeled differently, and an architecture can encode that inductive bias directly.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "What Would Convince Me?"
+      },
+      {
+        "type": "paragraph",
+        "text": "A convincing result would require more than a single improvement on MNIST. I would want ablations that isolate direction, magnitude, concatenation, linear interactions, nonlinear interactions, and magnitude-conditioned transformations. I would want repeated seeds and held-out evaluation. I would also want datasets with different relationships between scale and class identity. If the same structural advantage appears across such conditions, the idea becomes more interesting than an isolated benchmark result.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Broader Question"
+      },
+      {
+        "type": "paragraph",
+        "text": "The deeper question is about representation design. Machine learning often gives us enormous freedom to learn a representation from data, but that freedom does not mean all structures are equally easy to learn. Geometry can provide a useful inductive bias. Separating radial and angular information is one way to ask whether the data itself has a structure that ordinary coordinates hide. The experiment is therefore less about proving that direction is universally better than magnitude and more about discovering when the distinction becomes useful.",
+        "cite": [
+          2
+        ]
+      }
+    ],
+    "tags": [
+      "Machine Learning",
+      "Representation Learning",
+      "PCA",
+      "SRTN",
+      "Mathematics",
+      "Geometry"
+    ],
+    "sources": [
+      {
+        "title": "Deep Hyperspherical Learning",
+        "url": "https://arxiv.org/abs/1711.03189",
+        "publisher": "Liu et al., NeurIPS 2017",
+        "type": "Research paper",
+        "citedIn": 7
+      },
+      {
+        "title": "Decomposing signals in components: PCA",
+        "url": "https://scikit-learn.org/stable/modules/decomposition.html",
+        "publisher": "scikit-learn",
+        "type": "Technical documentation",
+        "citedIn": 4
+      }
+    ]
+  },
+  {
+    "slug": "building-a-lowbit-trace-corpus",
+    "date": "2026-08-10",
+    "readTime": "16 min read",
+    "title": "Building a LowBIt Trace Corpus",
+    "excerpt": "A research direction connecting deterministic programs, execution traces, RISC-V, and computer architecture into a reusable foundation for workload characterization and performance analysis.",
+    "body": [
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why Build a Trace Corpus at All?"
+      },
+      {
+        "type": "paragraph",
+        "text": "A benchmark normally answers a practical question: how fast does this system run this workload? A trace corpus can ask a more structural question: what kinds of execution behaviour does this workload contain, and how does that behaviour interact with a machine? That distinction matters when the goal is architecture research. A score compresses a long execution into a small number. A trace preserves a richer description of what happened along the way.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Central Research Problem"
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern processors execute workloads whose behaviour is a mixture of control flow, data movement, arithmetic, dependencies, speculation, and memory-system interaction. Two programs can have similar instruction counts while stressing completely different architectural resources. A corpus should therefore represent workload behaviour rather than only workload names. The challenge is to build enough diversity to be useful without losing the control and reproducibility that make scientific experiments interpretable.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why Deterministic Programs Are Valuable"
+      },
+      {
+        "type": "paragraph",
+        "text": "A small deterministic program can be generated from a known recipe. Its source, compiler configuration, input, binary, and expected output can be stored. If the program is intentionally designed around a particular behaviour, its architectural purpose can also be documented. This creates a useful bridge between benchmark generation and scientific experimentation. Instead of saying “this binary happened to cause many cache misses,” the corpus can say “this workload was designed to produce a controlled memory-access pattern.”",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "A Taxonomy Is More Important Than a Huge Directory"
+      },
+      {
+        "type": "paragraph",
+        "text": "A thousand executables without structure are difficult to study. A smaller collection organized by behaviour can be much more useful. A possible taxonomy includes branch-heavy programs, predictable branches, difficult branches, sequential memory access, strided access, irregular access, dependency chains, arithmetic intensity, mixed workloads, and combinations of these behaviours. The purpose is not to force every program into one category. It is to provide a vocabulary with which workloads can be compared.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The LowBIt Direction"
+      },
+      {
+        "type": "paragraph",
+        "text": "My LowBIt direction is built around lightweight workloads, low-bit computation, and architectural measurement. The benchmark side includes the idea of named benchmark specifications such as LB-ML-001, while the trace-corpus side focuses on producing a larger family of controlled programs and execution traces. The two are complementary. A benchmark can provide a carefully specified representative workload, while the corpus can provide the broader behavioural space needed for characterization and analysis.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "What a Trace Should Mean"
+      },
+      {
+        "type": "paragraph",
+        "text": "The word “trace” is dangerously broad. It can refer to instruction streams, memory references, branch outcomes, architectural events, microarchitectural events, or simulator-specific records. A useful corpus must define the trace schema precisely. Every record should have an unambiguous interpretation, a unit, and a relationship to the workload that produced it. Otherwise the dataset becomes difficult to reuse because researchers cannot tell which measurements are comparable.",
+        "cite": [
+          3
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Metadata Is Experimental Data"
+      },
+      {
+        "type": "paragraph",
+        "text": "The metadata surrounding a trace is not administrative decoration. It is part of the experiment. Useful fields can include workload identifier, source hash, compiler version, compiler flags, target ISA, input identifier, expected output, simulator version, CPU model, cache configuration, memory configuration, run parameters, and trace-generation timestamp. A trace without provenance is much harder to trust, reproduce, or compare.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Reference Validation"
+      },
+      {
+        "type": "paragraph",
+        "text": "Every generated workload should ideally have a correctness check independent of the performance measurement. For computational kernels, that might be a known output, checksum, invariant, or reference implementation. This separates two questions that are often accidentally mixed: did the program compute the correct result, and what did the architecture do while executing it? A fast incorrect program is not a useful benchmark.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "From Source to Corpus"
+      },
+      {
+        "type": "paragraph",
+        "text": "A robust pipeline can be viewed as a chain: workload specification, source generation, compilation, validation, execution, trace collection, metric extraction, quality checks, and packaging. Each stage should be deterministic where possible. If compilation changes the binary, the corpus should record that change. If a simulator version changes the trace format or timing behaviour, the provenance should make the distinction visible.",
+        "cite": [
+          3
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why 500 Programs Is an Interesting Scale"
+      },
+      {
+        "type": "paragraph",
+        "text": "A corpus of several hundred programs is large enough to move beyond a handful of hand-designed examples while still being manageable for systematic inspection. The number itself is not scientifically magical. What matters is coverage. Five hundred near-duplicates contribute less diversity than one hundred carefully distributed across a meaningful taxonomy. Program generation should therefore be guided by behavioural dimensions rather than by a target count alone.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "What Can Be Learned From the Corpus?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Once the traces are structured, several research directions become possible. One can cluster workloads by architectural behaviour, study correlations between source-level features and hardware events, evaluate performance models, train workload classifiers, test branch or cache heuristics, compare CPU configurations, or investigate whether low-bit kernels form distinctive execution signatures. The corpus becomes a substrate on which multiple experiments can be built.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "RISC-V as the First Target"
+      },
+      {
+        "type": "paragraph",
+        "text": "A RISC-V-first implementation is attractive because the ISA and specifications are openly available and because the same workload can be used as a bridge between compiler output, simulator models, and hardware implementations. The goal is not to claim that RISC-V behaviour is universal. Rather, it provides a transparent experimental target from which the methodology can later be extended to other architectures.",
+        "cite": [
+          3
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Reproducibility Test"
+      },
+      {
+        "type": "paragraph",
+        "text": "The strongest test of a corpus is whether someone else can regenerate a result without asking its creator what happened. A researcher should be able to identify a workload, recover its source and build information, reproduce the binary, run it under the documented configuration, and obtain results whose differences are explainable. Reproducibility turns a personal collection of experiments into research infrastructure.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Larger Vision"
+      },
+      {
+        "type": "paragraph",
+        "text": "The long-term idea is not simply to collect traces. It is to create a map between programs and machine behaviour. Once that map exists, architectural questions can be asked at a finer resolution: not only which processor is faster, but which classes of computation benefit from which architectural mechanisms and why. That is the point at which a benchmark corpus becomes more than a dataset. It becomes a laboratory.",
+        "cite": [
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "LowBIt",
+      "RISC-V",
+      "Computer Architecture",
+      "Benchmarking",
+      "Performance",
+      "Trace Analysis"
+    ],
+    "sources": [
+      {
+        "title": "gem5",
+        "url": "https://www.gem5.org/",
+        "publisher": "gem5 Project",
+        "type": "Simulation framework",
+        "citedIn": 7
+      },
+      {
+        "title": "RISC-V Ratified Specifications",
+        "url": "https://riscv.org/specifications/ratified/",
+        "publisher": "RISC-V International",
+        "type": "Specification",
+        "citedIn": 3
+      },
+      {
+        "title": "SPEC CPU2026",
+        "url": "https://www.spec.org/cpu2026/",
+        "publisher": "Standard Performance Evaluation Corporation",
+        "type": "Benchmark suite",
+        "citedIn": 4
+      }
+    ]
+  },
+  {
+    "slug": "operating-systems-through-symmetry",
+    "date": "2026-09-01",
+    "readTime": "15 min read",
+    "title": "Looking at Operating-System Synchronization Through Symmetry",
+    "excerpt": "An attempt to describe synchronization and scheduling using permutation groups, turning familiar operating-system mechanisms into questions about symmetry, restrictions, and state transformations.",
+    "body": [
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why Look at an Operating System With Abstract Algebra?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Operating-system synchronization is normally taught through mechanisms: locks, semaphores, monitors, barriers, condition variables, critical sections, and scheduling policies. These mechanisms are concrete and essential. But an implementation-oriented description does not always expose the mathematical structure of the state space. I became interested in asking whether synchronization can instead be viewed as a problem about transformations of system states, and whether permutation groups provide a useful language for that description.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Processes as Objects in a State Space"
+      },
+      {
+        "type": "paragraph",
+        "text": "Suppose a system contains n distinguishable processes. At an abstract level, one can consider configurations describing which process occupies which role or which process is permitted to progress. Permuting the process labels gives a family of transformations. The symmetric group S_n contains all permutations of n objects and provides a natural algebraic language for these transformations. The interesting step is not merely assigning a group to the processes, but asking which transformations remain admissible once synchronization constraints are imposed.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Synchronization as a Restriction"
+      },
+      {
+        "type": "paragraph",
+        "text": "A synchronization mechanism restricts concurrency. Mutual exclusion says that certain states are forbidden because more than one process cannot simultaneously own a resource. A semaphore limits the number of concurrent holders. A barrier constrains when processes can advance to a subsequent phase. These can be interpreted as restrictions on the transition structure of the system. From the group-theoretic viewpoint, the question becomes: which transformations preserve the permitted state structure?",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Stabilizers and Invariants"
+      },
+      {
+        "type": "paragraph",
+        "text": "Group actions introduce the idea of a stabilizer: the set of transformations that leave a chosen object or configuration unchanged. This provides an appealing analogy for synchronization. If a critical resource is associated with a protected configuration, the transformations that preserve the relevant constraint form a restricted family. The analogy becomes mathematically useful only when the state representation and action are defined precisely, but it offers a vocabulary for asking what synchronization preserves and what it forbids.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Scheduling as a Transformation Process"
+      },
+      {
+        "type": "paragraph",
+        "text": "Scheduling can also be interpreted as a sequence of state transformations. In a round-robin policy, for example, permission to execute moves through an ordered collection of processes. This resembles a cyclic permutation. The scheduler does not simply store a list. It repeatedly transforms the system's execution state according to a policy. Other scheduling policies produce different transition structures, and comparing those structures may reveal properties that are less obvious when the policies are described only as algorithms.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why the Group Structure Matters"
+      },
+      {
+        "type": "paragraph",
+        "text": "It would be easy to replace words such as “process switch” or “lock acquisition” with algebraic notation and gain nothing. The purpose of the abstraction is different. Groups provide composition, inverses, subgroups, orbits, stabilizers, and other structural concepts. If a synchronization model can be expressed using those concepts, we can ask mathematical questions about reachability, equivalence, symmetry breaking, and invariant structure rather than examining every execution sequence independently.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Symmetry Is Not the Same as Interchangeability"
+      },
+      {
+        "type": "paragraph",
+        "text": "A subtle issue appears immediately: processes may be structurally similar without being operationally interchangeable. Two worker processes can have identical code while occupying different queues, holding different resources, or having different priorities. A useful mathematical model therefore needs to distinguish label symmetry from actual system symmetry. The group action should represent a transformation that preserves the properties relevant to the model, not merely a renaming of symbols.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Concurrency Creates a Rich State Space"
+      },
+      {
+        "type": "paragraph",
+        "text": "A concurrent system is difficult partly because many possible interleavings exist. If n processes can make progress independently, the number of possible execution orders can grow rapidly. Synchronization removes some of those interleavings. From this perspective, a synchronization primitive can be interpreted as a mechanism that reduces the set of admissible paths through the state space. Algebra can complement transition-system reasoning by describing transformations that preserve or relate families of states.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "A Metric Perspective"
+      },
+      {
+        "type": "paragraph",
+        "text": "My work on this direction also explores a metric structure associated with the permutation representation. A metric can potentially turn an abstract collection of configurations into a geometric object in which distance measures some notion of difference between states or transformations. The difficult part is defining a metric whose interpretation is operationally meaningful. Mathematical elegance alone is insufficient. The distance should correspond to a property that matters for synchronization, scheduling, or state transformation.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Where the Model Can Break"
+      },
+      {
+        "type": "paragraph",
+        "text": "Any abstraction of an operating system risks leaving out the very mechanisms that determine behaviour. Real systems include memory ordering, interrupts, cache coherence, priorities, preemption, resource ownership, failures, and timing. A permutation model that ignores these details may be useful as a toy model but should not be presented as a complete description of synchronization. The productive approach is to state the abstraction boundary explicitly and then test which conclusions survive when additional mechanisms are introduced.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "From Algebra Back to Algorithms"
+      },
+      {
+        "type": "paragraph",
+        "text": "The most interesting outcome would be a two-way translation. The algebra should suggest a property that can be checked computationally, and the computational result should feed back into the mathematical model. For example, one might generate small synchronization systems, enumerate their reachable states, compute permutation-based invariants, and ask whether those invariants correlate with properties such as contention, symmetry breaking, or scheduling fairness.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why This Intersection Is Worth Exploring"
+      },
+      {
+        "type": "paragraph",
+        "text": "Operating systems and abstract algebra normally live in different sections of a curriculum. That separation is useful pedagogically, but research often becomes interesting precisely where the boundaries blur. Synchronization is fundamentally about constraints on state transitions. Group theory is fundamentally concerned with structured transformations. The possibility of connecting the two is therefore not arbitrary. The challenge is to make the connection precise enough that it produces predictions rather than merely interesting terminology.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Larger Lesson"
+      },
+      {
+        "type": "paragraph",
+        "text": "The project has changed the way I think about operating systems. A lock is not only an API call. A scheduler is not only a loop over processes. Beneath those mechanisms is a state space with allowed and forbidden transitions, symmetries, invariants, and transformations. Abstract algebra offers one possible language for studying that structure. Whether the resulting framework becomes practically useful depends on the formalization, but the question itself is valuable: what mathematical structure is already hiding inside the operating systems we build every day?",
+        "cite": [
+          1
+        ]
+      }
+    ],
+    "tags": [
+      "Operating Systems",
+      "Abstract Algebra",
+      "Group Theory",
+      "Mathematical Modelling",
+      "Scheduling",
+      "Concurrency"
+    ],
+    "sources": [
+      {
+        "title": "Operating Systems: Three Easy Pieces",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+        "publisher": "Remzi & Andrea Arpaci-Dusseau",
+        "type": "Textbook",
+        "citedIn": 8
+      },
+      {
+        "title": "Symmetric group",
+        "url": "https://en.wikipedia.org/wiki/Symmetric_group",
+        "publisher": "Wikipedia",
+        "type": "Reference",
+        "citedIn": 5
+      }
+    ]
+  }
 ]

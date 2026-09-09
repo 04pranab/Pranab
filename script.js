@@ -380,6 +380,75 @@ function slugifyHeading(text) {
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-');
 }
+/* -- Blog citations & sources ------------------------------------------ */
+function renderCitationMarkers(citations) {
+  if (!Array.isArray(citations) || !citations.length) return '';
+
+  return `
+    <span class="blog-citations" aria-label="Sources cited in this paragraph">
+      ${citations.map(n => `
+        <a class="blog-citation" href="#blog-source-${n}" data-source-ref="${n}" aria-label="Go to source ${n}">[${n}]</a>
+      `).join('')}
+    </span>
+  `;
+}
+
+function renderBlogSources(post) {
+  const container = $('#blog-sources-container');
+  if (!container) return;
+
+  const sources = Array.isArray(post.sources) ? post.sources : [];
+
+  if (!sources.length) {
+    container.innerHTML = '';
+    return;
+  }
+
+  container.innerHTML = `
+    <section class="blog-sources" aria-labelledby="blog-sources-title">
+      <div class="blog-sources-heading">
+        <div>
+          <span class="blog-sources-kicker">Research trail</span>
+          <h3 id="blog-sources-title">Sources &amp; further reading</h3>
+        </div>
+        <span class="blog-sources-count">${sources.length} ${sources.length === 1 ? 'source' : 'sources'}</span>
+      </div>
+
+      <p class="blog-sources-intro">
+        References are linked from the text with numbered citations. Open any source to inspect the material behind the discussion.
+      </p>
+
+      <ol class="blog-source-list">
+        ${sources.map((source, index) => {
+    const n = index + 1;
+    const citedIn = Number(source.citedIn || 0);
+    let domain = '';
+    try { domain = new URL(source.url).hostname.replace(/^www\./, ''); } catch (_) { }
+
+    return `
+            <li class="blog-source-card" id="blog-source-${n}">
+              <div class="blog-source-number">${String(n).padStart(2, '0')}</div>
+              <div class="blog-source-main">
+                <div class="blog-source-topline">
+                  <span class="blog-source-type">${esc(source.type || 'Reference')}</span>
+                  ${citedIn ? `<span class="blog-source-cited">cited ${citedIn}×</span>` : ''}
+                </div>
+                <a class="blog-source-title" href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">
+                  ${esc(source.title || domain || source.url)} <span aria-hidden="true">↗</span>
+                </a>
+                <div class="blog-source-meta">
+                  <span>${esc(source.publisher || domain)}</span>
+                  ${domain ? `<span class="blog-source-domain">${esc(domain)}</span>` : ''}
+                </div>
+              </div>
+            </li>
+          `;
+  }).join('')}
+      </ol>
+    </section>
+  `;
+}
+
 /* -- Render: single blog post ----------------------------------------- */
 function renderBlogPost(post) {
   $('#blogpost-date').textContent = post.date;
@@ -408,7 +477,12 @@ function renderBlogPost(post) {
     switch (block.type) {
 
       case 'paragraph':
-        return `<p>${esc(block.text || '')}</p>`;
+        return `
+    <p>
+      ${block.text}
+      ${renderCitationMarkers(block.cite)}
+    </p>
+  `;
 
       case 'heading': {
         const level = Math.min(
@@ -477,11 +551,137 @@ function renderBlogPost(post) {
     }
   }
 
+  renderBlogSources(post);
+
   // Setup related features
   setupShareButtons(post.title, post.slug);
   initReadingProgress();
   renderRelatedPosts(post, blogPosts);
   setupExpandableCode();
+  setupCitationLinks();
+}
+
+/* ---------------------------------------------------------
+   Inline citations
+--------------------------------------------------------- */
+
+function renderCitationMarkers(citations) {
+  if (!Array.isArray(citations) || citations.length === 0) {
+    return '';
+  }
+
+  return citations.map(number => `
+    <a
+      href="#"
+      class="blog-citation"
+      data-source-ref="${number}"
+      aria-label="Go to source ${number}"
+    >[${number}]</a>
+  `).join('');
+}
+
+
+/* ---------------------------------------------------------
+   Sources
+--------------------------------------------------------- */
+function renderBlogSources(post) {
+  const container = document.getElementById('blog-sources-container');
+
+  if (!container) return;
+
+  const sources = Array.isArray(post.sources) ? post.sources : [];
+
+  if (!sources.length) {
+    container.innerHTML = '';
+    return;
+  }
+
+  container.innerHTML = `
+    <section class="blog-sources">
+      <div class="blog-sources-kicker">Research trail</div>
+
+      <div class="blog-sources-heading">
+        <h3>Sources</h3>
+        <span>${sources.length} references</span>
+      </div>
+
+      <div class="blog-source-list">
+        ${sources.map((source, index) => {
+          const number = index + 1;
+
+          return `
+            <article
+              class="blog-source"
+              id="blog-source-${number}"
+            >
+              <div class="blog-source-number">[${number}]</div>
+
+              <div class="blog-source-content">
+                <a
+                  class="blog-source-title"
+                  href="${source.url}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  ${source.title}
+                  <span class="blog-source-arrow">↗</span>
+                </a>
+
+                <div class="blog-source-meta">
+                  ${source.publisher || ''}
+                  ${source.publisher && source.type ? ' · ' : ''}
+                  ${source.type || ''}
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('')}
+      </div>
+    </section>
+  `;
+}
+
+
+/* ---------------------------------------------------------
+   Citation navigation
+--------------------------------------------------------- */
+
+function setupCitationLinks() {
+  document.addEventListener('click', function (event) {
+    const citation = event.target.closest('.blog-citation');
+
+    if (!citation) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const sourceNumber = citation.getAttribute('data-source-ref');
+    const source = document.getElementById(`blog-source-${sourceNumber}`);
+
+    if (!source) {
+      console.warn(`Citation source not found: blog-source-${sourceNumber}`);
+      return;
+    }
+
+    // Make sure the source is actually visible before scrolling
+    source.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'nearest'
+    });
+
+    // Highlight the exact source
+    source.classList.remove('citation-highlight');
+
+    // Restart the animation
+    void source.offsetWidth;
+
+    source.classList.add('citation-highlight');
+
+    setTimeout(() => {
+      source.classList.remove('citation-highlight');
+    }, 1600);
+  });
 }
 
 /* -- Toast Notifications ------------------------------------------ */
@@ -803,7 +1003,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-/* -- View routing ------------------------------------------------------ */
+
 /* -- View routing ------------------------------------------------------ */
 const views = $$('.view');
 const navIcons = $$('.nav-icon');
