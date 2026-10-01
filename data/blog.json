@@ -1421,5 +1421,600 @@
         "citedIn": 2
       }
     ]
+  },
+  {
+    "slug": "war-for-semiconductors",
+    "date": "2026-09-30",
+    "readTime": "18 min read",
+    "title": "War for Semiconductors",
+    "excerpt": "The semiconductor industry has become one of the central arenas of technological and economic competition. The real contest is not simply over who can design the fastest chip, but over who controls the factories, equipment, materials, architectures, software, talent, and supply chains required to build the computing future.",
+    "body": [
+      {
+        "type": "paragraph",
+        "text": "A modern computer can look deceptively simple. A processor sits inside a package, memory sits beside it, software tells it what to do, and the machine appears to become a single object. But beneath that surface is an enormous industrial system spread across laboratories, fabrication plants, chemical suppliers, equipment manufacturers, design houses, universities, logistics networks, and governments."
+      },
+      {
+        "type": "paragraph",
+        "text": "The semiconductor is not merely another industrial product. It is the point where mathematics, physics, chemistry, computer architecture, manufacturing, software and geopolitics converge. Whoever can reliably produce advanced semiconductors gains access to capabilities far beyond the chip itself: artificial intelligence, high-performance computing, telecommunications, automobiles, scientific instruments, satellites, consumer electronics and modern infrastructure all depend on them."
+      },
+      {
+        "type": "paragraph",
+        "text": "That is why the modern semiconductor industry increasingly resembles a strategic contest. Governments want domestic capacity. Companies want access to the best manufacturing technology. Nations want control over critical equipment and intellectual property. Supply chains are being redesigned around resilience as much as efficiency. The result is a competition that is often described as a 'war for semiconductors'."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The most valuable thing is not the chip"
+      },
+      {
+        "type": "paragraph",
+        "text": "A useful way to understand the semiconductor industry is to stop imagining it as a collection of chip companies. A modern chip passes through a chain of specialized capabilities. Someone defines the architecture. Someone develops the microarchitecture. Someone designs the circuit. Electronic design automation software turns that design into physical layouts. Manufacturing equipment patterns microscopic structures onto silicon. Chemicals and materials make fabrication possible. Packaging connects the finished die to the outside world. Testing determines whether the result actually works."
+      },
+      {
+        "type": "paragraph",
+        "text": "This specialization is one of the industry's greatest strengths and one of its greatest vulnerabilities. No single country controls every important layer. The semiconductor system is distributed internationally, but the most advanced capabilities are concentrated in particular companies and regions."
+      },
+      {
+        "type": "paragraph",
+        "text": "ASML, for example, sits at a critical point in the manufacturing chain through its lithography systems. Its 2025 annual report describes a supplier network of roughly 5,100 companies and more than 44,000 employees, illustrating how a seemingly single manufacturing tool is actually the endpoint of a huge industrial ecosystem.",
+        "cite": [
+          1
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "TSMC provides another example from the manufacturing side. Its 2025 annual report describes manufacturing operations across Taiwan, the United States, Japan and China, while continuing major investment in advanced manufacturing and packaging in Taiwan. In 2025, advanced technologies at 7-nanometer and beyond accounted for 74 percent of TSMC's wafer revenue.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The geography of a transistor"
+      },
+      {
+        "type": "paragraph",
+        "text": "Imagine following one advanced processor backward from a finished computer. The architecture might originate in one country. The processor could be designed in another. Critical electronic design software might come from a small number of specialized firms. Lithography equipment may come from the Netherlands. Manufacturing may happen in Taiwan. Memory may come from South Korea. Materials and manufacturing equipment may involve Japan. Packaging may occur somewhere else. The final system may be assembled in yet another country."
+      },
+      {
+        "type": "paragraph",
+        "text": "The transistor therefore has a geography."
+      },
+      {
+        "type": "paragraph",
+        "text": "This geography was built over decades because specialization made economic sense. Companies did not need to duplicate every capability locally. If one region could manufacture something more efficiently, the global industry could depend on it. For ordinary products, this can be a powerful optimization."
+      },
+      {
+        "type": "paragraph",
+        "text": "Semiconductors are different because the cost of interruption can extend far beyond the product itself. A disruption at one point in the chain can propagate through thousands of downstream products."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Taiwan and the foundry model"
+      },
+      {
+        "type": "paragraph",
+        "text": "One of the defining transformations of the semiconductor industry was the rise of the dedicated foundry. Instead of requiring every chip designer to own a fabrication plant, a foundry could manufacture chips designed by many different companies."
+      },
+      {
+        "type": "paragraph",
+        "text": "This separated chip design from manufacturing. A company could concentrate on architecture and design while another company concentrated on building the physical silicon."
+      },
+      {
+        "type": "paragraph",
+        "text": "Taiwan became central to this model, and TSMC became its most important example. The result was an extraordinary concentration of advanced manufacturing capability. TSMC's current expansion illustrates the attempt to preserve that manufacturing advantage while distributing some capacity internationally. Its Arizona operations began volume production of 4-nanometer technology in 2024, while additional facilities are being developed in the United States, Japan and Germany.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "This creates a strange industrial balance. The world wants semiconductor manufacturing to become geographically more distributed, but advanced manufacturing also depends on dense ecosystems of engineers, suppliers, equipment, process knowledge and accumulated experience. Moving a fab is therefore not equivalent to moving a warehouse."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why China matters"
+      },
+      {
+        "type": "paragraph",
+        "text": "China occupies several different positions in the semiconductor system at the same time. It is a major semiconductor market, a major electronics manufacturing center, a large participant in the global semiconductor supply chain, and a country investing heavily in domestic semiconductor capabilities."
+      },
+      {
+        "type": "paragraph",
+        "text": "At the same time, the United States has imposed export controls designed to restrict China's access to certain advanced computing chips and semiconductor manufacturing capabilities. The controls have included restrictions involving advanced computing devices, semiconductor manufacturing equipment and related technologies.",
+        "cite": [
+          3
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "The important point is that export controls do not simply regulate finished processors. Semiconductor manufacturing is an ecosystem. Restricting access to particular lithography, deposition, etching, metrology, software or memory technologies can affect the ability to construct an entire manufacturing process."
+      },
+      {
+        "type": "paragraph",
+        "text": "This turns technological capability into something resembling strategic terrain. A manufacturing tool can become strategically important. A software package can become strategically important. A memory technology can become strategically important."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The American response"
+      },
+      {
+        "type": "paragraph",
+        "text": "The United States has simultaneously pursued restrictions on selected semiconductor technologies and policies intended to expand domestic manufacturing."
+      },
+      {
+        "type": "paragraph",
+        "text": "The CHIPS program became a major part of this effort. For example, the U.S. Department of Commerce awarded TSMC Arizona up to $6.6 billion in direct funding in 2024 to support more than $65 billion of planned investment in three leading-edge fabs in Arizona.",
+        "cite": [
+          4
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Samsung also received an award of up to $4.745 billion under the CHIPS Incentives Program, supporting a planned investment of more than $37 billion in Texas. Intel received up to $7.865 billion in direct funding for projects across several U.S. states.",
+        "cite": [
+          5,
+          6
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "The deeper idea behind these investments is not simply to build more factories. It is to rebuild an ecosystem. A semiconductor fab needs chemicals, gases, equipment maintenance, precision engineering, packaging, testing, logistics, skilled workers and research institutions around it."
+      },
+      {
+        "type": "paragraph",
+        "text": "A fab without its surrounding ecosystem is a building full of extremely expensive machines. A semiconductor ecosystem is what turns that building into sustained manufacturing capability."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Netherlands has a different kind of power"
+      },
+      {
+        "type": "paragraph",
+        "text": "The semiconductor contest is often described as a competition between major chip-producing countries, but some of the most important leverage sits elsewhere."
+      },
+      {
+        "type": "paragraph",
+        "text": "The Netherlands provides a particularly interesting example. ASML occupies a critical position in advanced lithography, meaning that control over manufacturing equipment can matter almost as much as control over the factories themselves."
+      },
+      {
+        "type": "paragraph",
+        "text": "This reveals an important property of technological power: it does not always belong to the company that produces the final product. Sometimes it belongs to the company that produces the machine required to manufacture the product."
+      },
+      {
+        "type": "paragraph",
+        "text": "The semiconductor industry is therefore a network of bottlenecks. Some bottlenecks are obvious, such as leading-edge fabs. Others are hidden inside specialized equipment, materials, software and engineering knowledge."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Japan is rebuilding a semiconductor position"
+      },
+      {
+        "type": "paragraph",
+        "text": "Japan demonstrates another side of the semiconductor competition. Its importance is not limited to finished chips. Japan has long been significant in semiconductor materials, equipment and manufacturing technology, and its government is now supporting renewed domestic semiconductor capacity."
+      },
+      {
+        "type": "paragraph",
+        "text": "Rapidus was selected by Japan's Ministry of Economy, Trade and Industry as a supported next-generation semiconductor manufacturer in 2025. METI stated that the initiative involves development and production infrastructure for next-generation semiconductors, with government support directed toward establishing domestic capability.",
+        "cite": [
+          7
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "TSMC has also expanded its Japanese manufacturing presence. Its first fab in Kumamoto entered volume production at the end of 2024, and a second fab is under construction. TSMC's 2025 report states that the Japanese site is intended to cover technologies ranging from mature nodes to advanced 3-nanometer production.",
+        "cite": [
+          2
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Japan's role illustrates why semiconductor independence is difficult to define. A country does not need to manufacture every transistor to possess strategic semiconductor capability. Materials, equipment, process technology, packaging, research and skilled engineering can all be critical."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "And then there is India"
+      },
+      {
+        "type": "paragraph",
+        "text": "India enters this landscape from a different starting position. It has a large electronics market, a substantial software industry, a growing semiconductor design community and a large technical workforce, while building domestic fabrication and packaging capabilities."
+      },
+      {
+        "type": "paragraph",
+        "text": "The India Semiconductor Mission has been established to support the development of India's semiconductor and display ecosystem, including semiconductor manufacturing, assembly, testing, product design and research. Government documentation also describes incentives for semiconductor product design and support for modernization of the Semiconductor Laboratory in Mohali. ",
+        "cite": [
+          8
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "For India, the interesting question is not simply whether it can reproduce another country's semiconductor industry. The more useful question is which layers of the stack it can build exceptionally well."
+      },
+      {
+        "type": "paragraph",
+        "text": "Chip design, verification, embedded systems, RISC-V development, packaging, testing, semiconductor equipment, materials research and architecture research all occupy different positions in the value chain. A semiconductor strategy can therefore contain many routes rather than a single destination."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The architecture layer"
+      },
+      {
+        "type": "paragraph",
+        "text": "There is another battlefield that is easier to miss because it is invisible inside the silicon: architecture."
+      },
+      {
+        "type": "paragraph",
+        "text": "Instruction set architectures define an interface between software and hardware. They are not the physical transistor layout, but they influence how processors are designed, programmed and integrated into larger systems."
+      },
+      {
+        "type": "paragraph",
+        "text": "This is where open architectures such as RISC-V become particularly interesting. An open instruction set does not magically create a semiconductor industry. Fabrication, verification, implementation, software ecosystems and engineering expertise are still required. But it changes who can participate in architectural experimentation."
+      },
+      {
+        "type": "paragraph",
+        "text": "For researchers, this matters enormously. If the architecture is accessible, universities and independent teams can study processors without needing to own the entire semiconductor manufacturing chain."
+      },
+      {
+        "type": "paragraph",
+        "text": "The result is a subtle form of technological sovereignty. A researcher may not own a billion-dollar fabrication facility, but they can still experiment with processor architecture, hardware-software interfaces, memory systems and microarchitectural behavior."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "AI changed the equation"
+      },
+      {
+        "type": "paragraph",
+        "text": "Artificial intelligence has made the semiconductor contest even more intense because modern AI systems consume enormous amounts of computing capacity."
+      },
+      {
+        "type": "paragraph",
+        "text": "The important component is not always the accelerator alone. AI systems depend on high-bandwidth memory, advanced packaging, networking, power delivery, cooling and extremely large data-center infrastructure."
+      },
+      {
+        "type": "paragraph",
+        "text": "This means that an AI accelerator is not really a single chip problem. It is a system problem."
+      },
+      {
+        "type": "paragraph",
+        "text": "The U.S. Bureau of Industry and Security has explicitly included high-bandwidth memory in its semiconductor export-control framework, reflecting the importance of HBM to advanced computing and AI systems.",
+        "cite": [
+          9
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "As AI grows, the strategic value of semiconductor manufacturing expands with it. Computing capacity becomes infrastructure, and semiconductor capacity becomes a prerequisite for building that infrastructure."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The trillion-dollar industry"
+      },
+      {
+        "type": "paragraph",
+        "text": "The economic scale explains why governments care so deeply about this sector. Global semiconductor sales reached $791.7 billion in 2025, a 25.6 percent increase over 2024. The Semiconductor Industry Association reported that logic and memory were the largest growth categories, while demand from AI and other advanced technologies continued to push the market upward.",
+        "cite": [
+          10
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "By mid-2026, the growth had accelerated further. The Semiconductor Industry Association reported $403.3 billion in global semiconductor sales during the second quarter of 2026 alone, up 35.1 percent from the previous quarter.",
+        "cite": [
+          11
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "These numbers are not simply measurements of an industry becoming larger. They describe an industry becoming more deeply embedded in almost every other industry."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Efficiency versus resilience"
+      },
+      {
+        "type": "paragraph",
+        "text": "For decades, globalization encouraged companies to optimize for efficiency. If a specialized supplier could manufacture something cheaper or better on the other side of the world, the supply chain could simply depend on it."
+      },
+      {
+        "type": "paragraph",
+        "text": "Resilience asks a different question: what happens if that supplier becomes unavailable?"
+      },
+      {
+        "type": "paragraph",
+        "text": "The answer can be surprisingly uncomfortable. A supply chain optimized for minimum cost may contain very little redundancy. A second source might exist on paper but lack the capacity, tooling, qualification or process maturity required to replace the first."
+      },
+      {
+        "type": "paragraph",
+        "text": "Semiconductor manufacturing makes this problem extreme because fabrication processes are highly specialized and qualification can take substantial time. Replacing one supplier is not necessarily a procurement exercise. It can become an engineering project."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Why building a fab is not enough"
+      },
+      {
+        "type": "paragraph",
+        "text": "A semiconductor fabrication plant can cost billions of dollars. But money alone does not immediately create manufacturing expertise."
+      },
+      {
+        "type": "paragraph",
+        "text": "Process recipes accumulate through years of experimentation. Engineers learn how tiny changes in temperature, chemistry, timing, contamination control and equipment behavior affect yield. Suppliers learn how to maintain tools. Manufacturers learn how to diagnose failures."
+      },
+      {
+        "type": "paragraph",
+        "text": "This accumulated knowledge is difficult to quantify. It does not appear on a balance sheet as a single machine or building."
+      },
+      {
+        "type": "paragraph",
+        "text": "A modern semiconductor ecosystem is therefore partly an information system. The factories store physical infrastructure, but the industry also stores decades of process knowledge inside people, software, equipment databases, manufacturing routines and organizational memory."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The real contest is over knowledge"
+      },
+      {
+        "type": "paragraph",
+        "text": "This is why semiconductor competition cannot be understood entirely through factory counts or investment announcements."
+      },
+      {
+        "type": "paragraph",
+        "text": "A country can possess land, capital and electricity and still struggle to manufacture advanced processors. It needs people who understand semiconductor physics, process engineering, architecture, verification, packaging, software, equipment and systems integration."
+      },
+      {
+        "type": "paragraph",
+        "text": "The deepest strategic resource is therefore knowledge that can be reproduced."
+      },
+      {
+        "type": "paragraph",
+        "text": "If a country can train engineers, conduct research, build prototypes, transfer knowledge into manufacturing and continuously improve its processes, it can gradually create semiconductor capability. If it only purchases finished technology, its position remains dependent on the external ecosystem."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "A war without a battlefield"
+      },
+      {
+        "type": "paragraph",
+        "text": "The phrase 'war for semiconductors' can make the industry sound like a conventional conflict. It is not. The competition occurs through investment, research, patents, export controls, industrial policy, supply-chain agreements, talent recruitment, manufacturing expansion and technological standards."
+      },
+      {
+        "type": "paragraph",
+        "text": "A new fabrication plant can matter strategically. So can a university laboratory. So can a packaging technology. So can a compiler. So can an open instruction set. So can a manufacturing engineer who knows how to make a difficult process yield another fraction of a percent."
+      },
+      {
+        "type": "paragraph",
+        "text": "The battlefield is distributed across thousands of laboratories and factories."
+      },
+      {
+        "type": "paragraph",
+        "text": "The weapons are often spreadsheets, process recipes, patents, machine tools, algorithms and engineering talent."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The paradox of semiconductor independence"
+      },
+      {
+        "type": "paragraph",
+        "text": "There is an important paradox here. The more strategically important semiconductors become, the harder complete independence becomes."
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern chips depend on such a large collection of specialized capabilities that attempting to reproduce every layer domestically may be inefficient or technically unrealistic. At the same time, excessive dependence on one external source can create serious vulnerabilities."
+      },
+      {
+        "type": "paragraph",
+        "text": "The practical objective is therefore often not absolute independence. It is sufficient capability, diversified access, trusted partnerships and enough domestic knowledge to understand and control critical parts of the chain."
+      },
+      {
+        "type": "paragraph",
+        "text": "That distinction matters. Resilience does not mean building everything yourself. It means knowing which dependencies are acceptable, which are dangerous, and which capabilities must never disappear."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "What happens next?"
+      },
+      {
+        "type": "paragraph",
+        "text": "The semiconductor industry is likely to become even more geographically distributed while remaining technologically interconnected."
+      },
+      {
+        "type": "paragraph",
+        "text": "The United States is expanding domestic manufacturing and attempting to shape access to advanced computing technologies. China is investing heavily in domestic semiconductor capabilities while operating within an increasingly restricted technology environment. Taiwan remains central to leading-edge manufacturing while its major companies expand internationally. Japan is rebuilding advanced semiconductor capacity and strengthening its equipment and materials ecosystem. Europe is attempting to strengthen parts of its own semiconductor base. India is developing manufacturing, packaging and design capabilities."
+      },
+      {
+        "type": "paragraph",
+        "text": "None of these efforts completely replaces the global semiconductor system. Instead, they reshape it."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The systems perspective"
+      },
+      {
+        "type": "paragraph",
+        "text": "For someone interested in computer architecture, this entire story can be viewed from another angle."
+      },
+      {
+        "type": "paragraph",
+        "text": "A processor is a system of interacting layers. The same is true of the semiconductor industry."
+      },
+      {
+        "type": "paragraph",
+        "text": "Architecture depends on implementation. Implementation depends on manufacturing. Manufacturing depends on equipment and materials. Equipment depends on specialized engineering. All of these depend on people, capital, software and research."
+      },
+      {
+        "type": "paragraph",
+        "text": "Remove one layer and the behavior of the whole system can change."
+      },
+      {
+        "type": "paragraph",
+        "text": "This is exactly the kind of problem that systems thinking is designed to understand. The interesting question is not simply 'Who makes the best chip?' It is 'What network of dependencies makes the chip possible?'"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The future may belong to the connectors"
+      },
+      {
+        "type": "paragraph",
+        "text": "The semiconductor industry is often portrayed through famous companies and famous processors. But some of the most consequential technologies sit between the obvious layers."
+      },
+      {
+        "type": "paragraph",
+        "text": "Packaging connects dies. Interconnects connect processors and memory. EDA tools connect designs to manufacturing. Instruction sets connect software to hardware. Standards connect companies. Universities connect theory to engineering. Supply chains connect countries."
+      },
+      {
+        "type": "paragraph",
+        "text": "These interfaces are where dependencies become visible."
+      },
+      {
+        "type": "paragraph",
+        "text": "And interfaces are where new opportunities often appear."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "A different definition of semiconductor power"
+      },
+      {
+        "type": "paragraph",
+        "text": "Semiconductor power is therefore not a single number. It is not merely the number of fabs a country owns, the number of chips it exports, or the size of its semiconductor companies."
+      },
+      {
+        "type": "paragraph",
+        "text": "It is the ability to understand, design, manufacture, verify, package, deploy and improve computing technology across multiple layers of the stack."
+      },
+      {
+        "type": "paragraph",
+        "text": "That is why the semiconductor contest reaches from atomic-scale manufacturing to instruction-set architecture, from chemical engineering to operating systems, and from university laboratories to national industrial policy."
+      },
+      {
+        "type": "paragraph",
+        "text": "The chip is tiny."
+      },
+      {
+        "type": "paragraph",
+        "text": "The system surrounding it is enormous."
+      },
+      {
+        "type": "paragraph",
+        "text": "And the competition is increasingly about who can understand that entire system well enough to shape what comes next."
+      },
+      {
+        "type": "paragraph",
+        "text": "The future of computing will not be decided only by who designs the fastest processor. It will also be shaped by who can build the factories, control the tools, train the engineers, develop the architectures, secure the supply chains and preserve the knowledge required to keep those processors possible."
+      },
+      {
+        "type": "paragraph",
+        "text": "The war for semiconductors is therefore not really a war over silicon."
+      },
+      {
+        "type": "paragraph",
+        "text": "It is a competition over the ability to turn knowledge into computing power."
+      }
+    ],
+    "tags": [
+      "Semiconductors",
+      "Computer Architecture",
+      "RISC-V",
+      "Geopolitics",
+      "Hardware",
+      "AI",
+      "Supply Chains",
+      "Technology Policy"
+    ],
+    "sources": [
+      {
+        "title": "2025 Annual Report",
+        "url": "https://investor.asml.com/annual-reports/2025",
+        "publisher": "ASML",
+        "type": "Annual Report",
+        "citedIn": 1
+      },
+      {
+        "title": "2025 Annual Report",
+        "url": "https://investor.tsmc.com/static/annualReports/2025/english/index.html",
+        "publisher": "TSMC",
+        "type": "Annual Report",
+        "citedIn": 2
+      },
+      {
+        "title": "Commerce Strengthens Export Controls to Restrict China's Capability to Produce Advanced Semiconductors for Military Applications",
+        "url": "https://www.bis.gov/press-release/commerce-strengthens-export-controls-restrict-chinas-capability-produce-advanced-semiconductors-military",
+        "publisher": "U.S. Bureau of Industry and Security",
+        "type": "Export Controls",
+        "citedIn": 3
+      },
+      {
+        "title": "CHIPS Incentives Award with TSMC Arizona to Secure U.S. Leadership in Advanced Semiconductor Technology",
+        "url": "https://www.commerce.gov/news/press-releases/2024/11/biden-harris-administration-announces-chips-incentives-award-tsmc",
+        "publisher": "U.S. Department of Commerce",
+        "type": "Industrial Policy",
+        "citedIn": 4
+      },
+      {
+        "title": "CHIPS Incentives Award with Samsung Electronics",
+        "url": "https://www.commerce.gov/news/press-releases/2024/12/chips-incentives-award-samsung-electronics",
+        "publisher": "U.S. Department of Commerce",
+        "type": "Industrial Policy",
+        "citedIn": 5
+      },
+      {
+        "title": "CHIPS Incentives Award with Intel",
+        "url": "https://www.commerce.gov/news/press-releases/2024/11/biden-harris-administration-announces-chips-incentives-award-intel",
+        "publisher": "U.S. Department of Commerce",
+        "type": "Industrial Policy",
+        "citedIn": 6
+      },
+      {
+        "title": "Rapidus Selected as Next-Generation Semiconductor Manufacturer",
+        "url": "https://www.meti.go.jp/press/2025/11/20251121001/20251121001.html",
+        "publisher": "Japan Ministry of Economy, Trade and Industry",
+        "type": "Industrial Policy",
+        "citedIn": 7
+      },
+      {
+        "title": "India Semiconductor Mission and Semiconductor Ecosystem",
+        "url": "https://www.meity.gov.in/static/uploads/2026/04/46face7d48c8f6a97030f713ad5fdab4.pdf",
+        "publisher": "Ministry of Electronics and Information Technology, Government of India",
+        "type": "Government Report",
+        "citedIn": 8
+      },
+      {
+        "title": "Commerce Strengthens Restrictions on Advanced Computing Semiconductors and Semiconductor Manufacturing Equipment",
+        "url": "https://www.bis.gov/press-release/commerce-strengthens-restrictions-advanced-computing-semiconductors-semiconductor-manufacturing-equipment",
+        "publisher": "U.S. Bureau of Industry and Security",
+        "type": "Export Controls",
+        "citedIn": 9
+      },
+      {
+        "title": "Global Annual Semiconductor Sales Increase 25.6% to $791.7 Billion in 2025",
+        "url": "https://www.semiconductors.org/global-annual-semiconductor-sales-increase-25-6-to-791-7-billion-in-2025/",
+        "publisher": "Semiconductor Industry Association",
+        "type": "Industry Data",
+        "citedIn": 10
+      },
+      {
+        "title": "Global Semiconductor Sales Increase 35.1% from Q1 2026 to Q2 2026",
+        "url": "https://www.semiconductors.org/global-semiconductor-sales-increase-35-1-from-q1-2026-to-q2-2026/",
+        "publisher": "Semiconductor Industry Association",
+        "type": "Industry Data",
+        "citedIn": 11
+      }
+    ]
   }
 ]
